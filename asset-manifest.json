@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/idrak.az-protocols/static/css/main.a617e044.chunk.css",
+    "main.js": "/idrak.az-protocols/static/js/main.69ec5944.chunk.js",
+    "main.js.map": "/idrak.az-protocols/static/js/main.69ec5944.chunk.js.map",
+    "runtime-main.js": "/idrak.az-protocols/static/js/runtime-main.c74fcc10.js",
+    "runtime-main.js.map": "/idrak.az-protocols/static/js/runtime-main.c74fcc10.js.map",
+    "static/js/2.083bd37e.chunk.js": "/idrak.az-protocols/static/js/2.083bd37e.chunk.js",
+    "static/js/2.083bd37e.chunk.js.map": "/idrak.az-protocols/static/js/2.083bd37e.chunk.js.map",
+    "static/js/3.7f80f70c.chunk.js": "/idrak.az-protocols/static/js/3.7f80f70c.chunk.js",
+    "static/js/3.7f80f70c.chunk.js.map": "/idrak.az-protocols/static/js/3.7f80f70c.chunk.js.map",
+    "index.html": "/idrak.az-protocols/index.html",
+    "static/css/main.a617e044.chunk.css.map": "/idrak.az-protocols/static/css/main.a617e044.chunk.css.map",
+    "static/js/2.083bd37e.chunk.js.LICENSE.txt": "/idrak.az-protocols/static/js/2.083bd37e.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/idrak.az-protocols/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c74fcc10.js",
+    "static/js/2.083bd37e.chunk.js",
+    "static/css/main.a617e044.chunk.css",
+    "static/js/main.69ec5944.chunk.js"
+  ]
+}
