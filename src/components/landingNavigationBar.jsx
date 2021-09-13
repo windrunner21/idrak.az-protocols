@@ -26,7 +26,11 @@ export default function LandingNavigationBar() {
     <div className={classes.root}>
       <AppBar position="static" color="#000">
         <Toolbar>
-          <Button href="/" variant="text" className={classes.title}>
+          <Button
+            href="/idrak.az-protocols/"
+            variant="text"
+            className={classes.title}
+          >
             IPS
           </Button>
           <Grid container justifyContent="flex-end" spacing={2}>

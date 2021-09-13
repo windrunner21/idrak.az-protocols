@@ -11,7 +11,7 @@ const images = [
     url: "https://source.unsplash.com/bAQH53VquTc",
     title: "Start Court Session",
     width: "50%",
-    link: "/idrak.az-protocols/tart",
+    link: "/idrak.az-protocols/start",
   },
   {
     url: "https://source.unsplash.com/X3z1zud4wZ4",
