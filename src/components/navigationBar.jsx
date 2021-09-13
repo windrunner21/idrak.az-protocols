@@ -26,13 +26,17 @@ export default function NavigationBar() {
     <div className={classes.root}>
       <AppBar position="static" color="#000">
         <Toolbar>
-          <Button href="/" variant="text" className={classes.title}>
+          <Button
+            href="/idrak.az-protocols/"
+            variant="text"
+            className={classes.title}
+          >
             IPS
           </Button>
           <Grid container justifyContent="flex-end" spacing={2}>
             <Grid item>
               <Button
-                to="/start"
+                to="/idrak.az-protocols/start"
                 component={RouterLink}
                 color="primary"
                 variant="outlined"
@@ -42,7 +46,7 @@ export default function NavigationBar() {
             </Grid>
             <Grid item>
               <Button
-                to="/edit"
+                to="/idrak.az-protocols/edit"
                 component={RouterLink}
                 color="primary"
                 variant="outlined"
@@ -52,7 +56,7 @@ export default function NavigationBar() {
             </Grid>
             <Grid item>
               <Button
-                to="/sign-in"
+                to="/idrak.az-protocols/sign-in"
                 component={RouterLink}
                 color="primary"
                 variant="contained"

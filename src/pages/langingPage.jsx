@@ -11,13 +11,13 @@ const images = [
     url: "https://source.unsplash.com/bAQH53VquTc",
     title: "Start Court Session",
     width: "50%",
-    link: "/start",
+    link: "/idrak.az-protocols/tart",
   },
   {
     url: "https://source.unsplash.com/X3z1zud4wZ4",
     title: "Stenography",
     width: "50%",
-    link: "/edit",
+    link: "/idrak.az-protocols/edit",
   },
 ];
 

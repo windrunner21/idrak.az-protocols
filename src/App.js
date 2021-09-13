@@ -10,11 +10,29 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" render={(props) => <LandingPage />} />
-        <Route path="/start" render={(props) => <StartPage />} />
-        <Route path="/edit" render={(props) => <EditPage />} />
-        <Route exact path="/sign-in" render={(props) => <SignIn />} />
-        <Route exact path="/sign-up" render={(props) => <SignUp />} />
+        <Route
+          exact
+          path="/idrak.az-protocols/"
+          render={(props) => <LandingPage />}
+        />
+        <Route
+          path="/idrak.az-protocols/start"
+          render={(props) => <StartPage />}
+        />
+        <Route
+          path="/idrak.az-protocols/edit"
+          render={(props) => <EditPage />}
+        />
+        <Route
+          exact
+          path="/idrak.az-protocols/sign-in"
+          render={(props) => <SignIn />}
+        />
+        <Route
+          exact
+          path="/idrak.az-protocols/sign-up"
+          render={(props) => <SignUp />}
+        />
       </Switch>
     </Router>
   );

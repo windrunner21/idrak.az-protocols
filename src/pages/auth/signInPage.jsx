@@ -82,7 +82,7 @@ export default function SignIn() {
             </Button>
             <Grid container justifyContent="center">
               <Grid item>
-                <Link href="/sign-up" variant="body2">
+                <Link href="/idrak.az-protocols/sign-up" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

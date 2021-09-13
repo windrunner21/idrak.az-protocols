@@ -32,7 +32,7 @@ export default function LandingNavigationBar() {
           <Grid container justifyContent="flex-end" spacing={2}>
             <Grid item>
               <Button
-                to="/sign-in"
+                to="/idrak.az-protocols/sign-in"
                 component={RouterLink}
                 color="primary"
                 variant="contained"
