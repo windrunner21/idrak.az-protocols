@@ -23,14 +23,8 @@ export default function EditPage() {
     <div className={classes.root}>
       <NavigationBar />
       <SessionControls />
-      <Grid container alignItems="flex-start" spacing={5}>
-        <Grid item xs={7} mg={7} lg={7}>
-          <AudioTracks />
-        </Grid>
-        <Grid item xs={5} mg={5} lg={5}>
-          <RoleTags />
-        </Grid>
-      </Grid>
+      <RoleTags />
+      <AudioTracks />
       <Grid container alignItems="flex-start" spacing={5}>
         <Grid item xs={6} mg={6} lg={6}>
           <OriginalText />
