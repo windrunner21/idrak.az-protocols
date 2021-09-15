@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -11,6 +11,7 @@ import Button from "@material-ui/core/Button";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import SaveIcon from "@material-ui/icons/InsertDriveFile";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -29,19 +30,26 @@ const useStyles = makeStyles((theme) => ({
 export default function SessionControls() {
   const classes = useStyles();
 
-  const [session, setSession] = React.useState("");
+  const [session, setSession] = useState("");
+  const [open, setOpen] = useState(false);
+  const [sessions, setSessions] = useState([]);
 
   const handleChange = (event) => {
     setSession(event.target.value);
   };
 
-  const [open, setOpen] = React.useState(false);
   const handleClose = () => {
     setOpen(false);
   };
   const handleToggle = () => {
     setOpen(!open);
   };
+
+  useEffect(() => {
+    axios.get(`34.65.77.89:8100/voice/proto/v1/sessions`).then((res) => {
+      setSessions(res.data);
+    });
+  });
 
   return (
     <div style={{ marginTop: 30, marginLeft: 30 }}>
@@ -62,7 +70,7 @@ export default function SessionControls() {
         >
           <Grid item style={{ flexGrow: 1 }}>
             <FormControl variant="outlined" className={classes.formControl}>
-              <InputLabel id="select-session-outlined">Заседание</InputLabel>
+              <InputLabel id="select-session-outlined">Session</InputLabel>
               <Select
                 labelId="select-session-outlined"
                 id="select-session"
@@ -71,11 +79,11 @@ export default function SessionControls() {
                 label="Заседание"
               >
                 <MenuItem value="">
-                  <em>Выбрать заседание</em>
+                  <em>Choose a session</em>
                 </MenuItem>
-                <MenuItem value={10}>Session A</MenuItem>
-                <MenuItem value={20}>Session B</MenuItem>
-                <MenuItem value={30}>Session C</MenuItem>
+                {sessions.map((item, index) => (
+                  <MenuItem value={index}>{item["name"]}</MenuItem>
+                ))}
               </Select>
             </FormControl>
           </Grid>
