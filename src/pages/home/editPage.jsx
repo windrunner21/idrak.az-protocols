@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import NavigationBar from "../../components/navigationBar";
@@ -18,19 +18,24 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EditPage() {
   const classes = useStyles();
+  const [sessionId, setSessionId] = useState("none");
+  const [sessionRecords, setRecordsBySession] = useState([]);
 
   return (
     <div className={classes.root}>
       <NavigationBar />
-      <SessionControls />
+      <SessionControls
+        getSession={setSessionId}
+        getRecordsBySession={setRecordsBySession}
+      />
       <RoleTags />
-      <AudioTracks />
+      <AudioTracks sessionID={sessionId} sessionRecords={sessionRecords} />
       <Grid container alignItems="flex-start" spacing={5}>
         <Grid item xs={6} mg={6} lg={6}>
-          <OriginalText />
+          <OriginalText sessionRecords={sessionRecords} />
         </Grid>
         <Grid item xs={6} mg={6} lg={6}>
-          <EditedText />
+          <EditedText sessionRecords={sessionRecords} />
         </Grid>
       </Grid>
       <SaveDocument />

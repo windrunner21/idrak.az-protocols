@@ -27,15 +27,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SessionControls() {
+export default function SessionControls(props) {
   const classes = useStyles();
 
   const [session, setSession] = useState("");
   const [open, setOpen] = useState(false);
+  // rest api variables
   const [sessions, setSessions] = useState([]);
 
   const handleChange = (event) => {
+    // TODO CHECK SESSION ID
     setSession(event.target.value);
+    props.getSession(event.target.value);
+    axios
+      .get(`http://34.65.77.89:8100/voice/proto/v1/records?sessionId=` + 1)
+      .then((res) => {
+        console.log(res.data);
+        props.getRecordsBySession(res.data);
+      });
   };
 
   const handleClose = () => {
@@ -46,10 +55,11 @@ export default function SessionControls() {
   };
 
   useEffect(() => {
-    axios.get(`34.65.77.89:8100/voice/proto/v1/sessions`).then((res) => {
+    // get all sessions
+    axios.get(`http://34.65.77.89:8100/voice/proto/v1/sessions`).then((res) => {
       setSessions(res.data);
     });
-  });
+  }, []);
 
   return (
     <div style={{ marginTop: 30, marginLeft: 30 }}>
@@ -76,13 +86,15 @@ export default function SessionControls() {
                 id="select-session"
                 value={session}
                 onChange={handleChange}
-                label="Заседание"
+                label="Sessions"
               >
                 <MenuItem value="">
                   <em>Choose a session</em>
                 </MenuItem>
                 {sessions.map((item, index) => (
-                  <MenuItem value={index}>{item["name"]}</MenuItem>
+                  <MenuItem key={item["id"]} value={item["name"]}>
+                    {item["name"]}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>

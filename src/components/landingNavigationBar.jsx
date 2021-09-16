@@ -24,7 +24,7 @@ export default function LandingNavigationBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="#000">
+      <AppBar position="static" style={{ backgroundColor: "#fff" }}>
         <Toolbar>
           <Button
             href="/idrak.az-protocols/"
