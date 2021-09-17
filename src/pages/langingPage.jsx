@@ -116,7 +116,7 @@ export default function ButtonBases() {
           </Grid>
           <Grid item xs={4}>
             <Typography style={{ paddingTop: 25 }} variant="h6">
-              Automating speech-to-text courtroom protocol creation.
+              Automating speech-to-text courtroom stenography creation.
             </Typography>
           </Grid>
         </Grid>

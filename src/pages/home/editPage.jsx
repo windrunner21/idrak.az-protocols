@@ -13,6 +13,7 @@ import SaveDocument from "../../components/saveDocument";
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#e2e2e2",
+    minHeight: "100vh",
   },
 }));
 

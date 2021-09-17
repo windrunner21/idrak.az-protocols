@@ -14,8 +14,7 @@ export default function AudioTracks(props) {
           props.sessionRecords.map((item, index) => (
             <ReactAudioPlayer
               style={{ marginLeft: 10 }}
-              src={item["audioRecord"]}
-              autoPlay
+              src={"data:audio/wav;base64," + item["audioRecord"]}
               controls
             />
           ))

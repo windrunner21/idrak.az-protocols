@@ -41,7 +41,7 @@ export default function NavigationBar() {
                 color="primary"
                 variant="outlined"
               >
-                Create
+                Create Session
               </Button>
             </Grid>
             <Grid item>
