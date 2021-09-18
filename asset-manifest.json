@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/idrak.az-protocols/static/css/main.a617e044.chunk.css",
-    "main.js": "/idrak.az-protocols/static/js/main.b111e794.chunk.js",
-    "main.js.map": "/idrak.az-protocols/static/js/main.b111e794.chunk.js.map",
+    "main.js": "/idrak.az-protocols/static/js/main.5ac4e4b3.chunk.js",
+    "main.js.map": "/idrak.az-protocols/static/js/main.5ac4e4b3.chunk.js.map",
     "runtime-main.js": "/idrak.az-protocols/static/js/runtime-main.419b425d.js",
     "runtime-main.js.map": "/idrak.az-protocols/static/js/runtime-main.419b425d.js.map",
     "static/css/2.ba2f4b51.chunk.css": "/idrak.az-protocols/static/css/2.ba2f4b51.chunk.css",
@@ -24,6 +24,6 @@
     "static/css/2.ba2f4b51.chunk.css",
     "static/js/2.954857e6.chunk.js",
     "static/css/main.a617e044.chunk.css",
-    "static/js/main.b111e794.chunk.js"
+    "static/js/main.5ac4e4b3.chunk.js"
   ]
 }
