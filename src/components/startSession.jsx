@@ -13,6 +13,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import Slide from "@material-ui/core/Slide";
 import moment from "moment";
 import axios from "axios";
+import AddWitness from "./addWitness";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -141,12 +142,15 @@ export default function StartSession(props) {
         </AppBar>
         <Grid
           container
-          justifyContent="space-evenly"
+          justifyContent="space-around"
           alignItems="center"
           style={{ padding: 100 }}
         >
           <Grid item>
-            <Typography variant="overline">Add Witnesses</Typography>
+            <Typography variant="h5">
+              Add Participating Witness in Court
+            </Typography>
+            <AddWitness />
           </Grid>
           <Grid item>
             <div className={classes.circle}>
