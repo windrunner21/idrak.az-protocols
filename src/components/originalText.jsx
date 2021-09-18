@@ -9,7 +9,7 @@ export default function OriginalText(props) {
     <div style={{ marginTop: 30, marginBottom: 30, marginLeft: 30 }}>
       <Typography variant="h6">Original Transcribed Text</Typography>
       <Paper style={{ padding: 20, marginTop: 10 }}>
-        {props.sessionRecords === [] ? (
+        {props.sessionID === "" || props.sessionID === "none" ? (
           <Typography>Choose a session to view transcribed text</Typography>
         ) : (
           <Grid container direction="column" spacing={2}>

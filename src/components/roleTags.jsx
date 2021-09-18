@@ -17,7 +17,7 @@ export default function RoleTags() {
 
   return (
     <div style={{ marginRight: 30, marginLeft: 30, marginBottom: 30 }}>
-      <Typography variant="h6">Filter and browse by roles</Typography>
+      <Typography variant="h6">Filter and browse participants</Typography>
       <Paper style={{ padding: 20, marginTop: 10 }}>
         <Autocomplete
           multiple
@@ -28,7 +28,7 @@ export default function RoleTags() {
           renderInput={(params) => (
             <TextField
               {...params}
-              label="Search roles"
+              label="Search participants"
               margin="normal"
               variant="outlined"
               InputProps={{ ...params.InputProps, type: "search" }}

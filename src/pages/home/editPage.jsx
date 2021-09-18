@@ -33,13 +33,13 @@ export default function EditPage() {
       <AudioTracks sessionID={sessionId} sessionRecords={sessionRecords} />
       <Grid container alignItems="flex-start" spacing={5}>
         <Grid item xs={6} mg={6} lg={6}>
-          <OriginalText sessionRecords={sessionRecords} />
+          <OriginalText sessionID={sessionId} sessionRecords={sessionRecords} />
         </Grid>
         <Grid item xs={6} mg={6} lg={6}>
-          <EditedText sessionRecords={sessionRecords} />
+          <EditedText sessionID={sessionId} sessionRecords={sessionRecords} />
         </Grid>
       </Grid>
-      <SaveDocument />
+      {sessionId !== "none" ? <SaveDocument /> : <div />}
       <Copyright />
     </div>
   );

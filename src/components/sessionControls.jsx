@@ -88,7 +88,7 @@ export default function SessionControls(props) {
                 onChange={handleChange}
                 label="Sessions"
               >
-                <MenuItem value="">
+                <MenuItem value="none">
                   <em>Choose a session</em>
                 </MenuItem>
                 {sessions.map((item, index) => (
@@ -105,6 +105,7 @@ export default function SessionControls(props) {
               variant="contained"
               startIcon={<SaveIcon />}
               onClick={handleToggle}
+              disabled={session === "" || session === "none"}
             >
               Show Full Document
             </Button>
