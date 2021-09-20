@@ -6,11 +6,15 @@ import Grid from "@material-ui/core/Grid";
 
 export default function EditedText(props) {
   return (
-    <div style={{ marginTop: 30, marginBottom: 30, marginRight: 30 }}>
-      <Typography variant="h6">Edited Text</Typography>
+    <div
+      style={{
+        margin: 30,
+      }}
+    >
+      <Typography variant="h6">Edit Transcribed Text</Typography>
       <Paper style={{ padding: 20, marginTop: 10 }}>
         {props.sessionID === "" || props.sessionID === "none" ? (
-          <Typography>Choose a session to view transcribed</Typography>
+          <Typography>Choose a session to edit transcribed text</Typography>
         ) : (
           <Grid container direction="column" spacing={2}>
             {props.sessionRecords.map((item, index) => (

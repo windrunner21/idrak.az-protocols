@@ -6,7 +6,11 @@ import Grid from "@material-ui/core/Grid";
 
 export default function OriginalText(props) {
   return (
-    <div style={{ marginTop: 30, marginBottom: 30, marginLeft: 30 }}>
+    <div
+      style={{
+        margin: 30,
+      }}
+    >
       <Typography variant="h6">Original Transcribed Text</Typography>
       <Paper style={{ padding: 20, marginTop: 10 }}>
         {props.sessionID === "" || props.sessionID === "none" ? (

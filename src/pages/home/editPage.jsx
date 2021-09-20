@@ -29,16 +29,21 @@ export default function EditPage() {
         getSession={setSessionId}
         getRecordsBySession={setRecordsBySession}
       />
+
       <RoleTags />
-      <AudioTracks sessionID={sessionId} sessionRecords={sessionRecords} />
-      <Grid container alignItems="flex-start" spacing={5}>
-        <Grid item xs={6} mg={6} lg={6}>
+
+      <Grid container alignItems="stretch" justifyContent="space-between">
+        <Grid item>
+          <AudioTracks sessionID={sessionId} sessionRecords={sessionRecords} />
+        </Grid>
+        <Grid item style={{ flexGrow: 1 }}>
           <OriginalText sessionID={sessionId} sessionRecords={sessionRecords} />
         </Grid>
-        <Grid item xs={6} mg={6} lg={6}>
+        <Grid item style={{ flexGrow: 1 }}>
           <EditedText sessionID={sessionId} sessionRecords={sessionRecords} />
         </Grid>
       </Grid>
+
       {sessionId !== "none" ? <SaveDocument /> : <div />}
       <Copyright />
     </div>
