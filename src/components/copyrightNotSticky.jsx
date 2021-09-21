@@ -2,9 +2,9 @@ import React from "react";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 
-export default function Copyright() {
+export default function CopyrightNotSticky() {
   return (
-    <div style={{ position: "fixed", width: "100%", bottom: 0, padding: 30 }}>
+    <div style={{ paddingBottom: 30 }}>
       <Typography variant="body2" color="textSecondary" align="center">
         {"Copyright © "}
         <Link color="inherit" href="https://idrak.com">

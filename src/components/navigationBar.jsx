@@ -42,7 +42,7 @@ export default function NavigationBar() {
               <Button
                 to="/idrak.az-protocols/start"
                 component={RouterLink}
-                color="primary"
+                style={{ borderColor: "#03a9f4", color: "#03a9f4" }}
                 variant="outlined"
               >
                 Create Session
@@ -52,7 +52,7 @@ export default function NavigationBar() {
               <Button
                 to="/idrak.az-protocols/edit"
                 component={RouterLink}
-                color="primary"
+                style={{ borderColor: "#03a9f4", color: "#03a9f4" }}
                 variant="outlined"
               >
                 Stenography
@@ -62,7 +62,7 @@ export default function NavigationBar() {
               <Button
                 to="/idrak.az-protocols/sign-in"
                 component={RouterLink}
-                color="primary"
+                style={{ backgroundColor: "#03a9f4", color: "#fff" }}
                 variant="contained"
               >
                 Sign In

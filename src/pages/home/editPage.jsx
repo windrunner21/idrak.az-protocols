@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import NavigationBar from "../../components/navigationBar";
-import Copyright from "../../components/copyright";
+import CopyrightNotSticky from "../../components/copyrightNotSticky";
 import SessionControls from "../../components/sessionControls";
 import AudioTracks from "../../components/audioTracks";
 import RoleTags from "../../components/roleTags";
@@ -50,7 +50,7 @@ export default function EditPage() {
       </Grid>
 
       {sessionId !== "none" ? <SaveDocument /> : <div />}
-      <Copyright />
+      <CopyrightNotSticky />
     </div>
   );
 }

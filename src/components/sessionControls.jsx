@@ -111,7 +111,7 @@ export default function SessionControls(props) {
           </Grid>
           <Grid item>
             <Button
-              color="primary"
+              style={{ backgroundColor: "#03a9f4", color: "#fff" }}
               variant="contained"
               startIcon={<SaveIcon />}
               onClick={handleToggle}

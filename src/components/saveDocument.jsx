@@ -13,7 +13,7 @@ export default function SaveDocument() {
       <Grid container justifyContent="flex-end" spacing={2}>
         <Grid item>
           <Button
-            color="secondary"
+            style={{ backgroundColor: "#e53935", color: "#fff" }}
             variant="contained"
             startIcon={<DeleteIcon />}
           >
@@ -21,7 +21,11 @@ export default function SaveDocument() {
           </Button>
         </Grid>
         <Grid item>
-          <Button color="primary" variant="contained" startIcon={<SaveIcon />}>
+          <Button
+            style={{ backgroundColor: "#03a9f4", color: "#fff" }}
+            variant="contained"
+            startIcon={<SaveIcon />}
+          >
             Save
           </Button>
         </Grid>

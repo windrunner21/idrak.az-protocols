@@ -109,7 +109,7 @@ export default function StartSession(props) {
       <Paper style={{ padding: 20, marginTop: 10 }}>
         <Button
           variant="contained"
-          color="primary"
+          style={{ backgroundColor: "#03a9f4", color: "#fff" }}
           startIcon={<Play />}
           onClick={handleButtonClick}
         >
