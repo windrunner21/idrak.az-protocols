@@ -28,7 +28,9 @@ export default function AudioTracks(props) {
                 <Grid container direction="column" spacing={1}>
                   <Grid item>
                     <Typography variant="subtitle2">
-                      {item["mic"]["name"]}
+                      {item["participant"] !== null
+                        ? item["participant"]["name"]
+                        : item["mic"]["name"]}
                     </Typography>
                   </Grid>
                   <Grid item>
