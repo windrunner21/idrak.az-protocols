@@ -16,7 +16,7 @@ const images = [
   },
   {
     url: "https://source.unsplash.com/X3z1zud4wZ4",
-    title: "Stenography",
+    title: "Search Protocols",
     width: "50%",
     link: "/idrak.az-protocols/edit",
   },
@@ -117,12 +117,15 @@ export default function ButtonBases() {
           alignItems="center"
         >
           <Grid item xs={4}>
-            <Typography variant="h2">
+            <Typography variant="h2" style={{ color: "#191414" }}>
               <b>Idrak Protocol System</b>
             </Typography>
           </Grid>
           <Grid item xs={4}>
-            <Typography style={{ paddingTop: 25 }} variant="h6">
+            <Typography
+              style={{ paddingTop: 25, color: "#191414" }}
+              variant="h6"
+            >
               Automating speech-to-text courtroom stenography creation.
             </Typography>
           </Grid>

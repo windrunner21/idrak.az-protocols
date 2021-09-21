@@ -11,15 +11,13 @@ import Button from "@material-ui/core/Button";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import SaveIcon from "@material-ui/icons/InsertDriveFile";
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1),
-    minWidth: 150,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
+    minWidth: 200,
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
@@ -34,6 +32,7 @@ export default function SessionControls(props) {
   const [open, setOpen] = useState(false);
   // rest api variables
   const [sessions, setSessions] = useState([]);
+  const [mics, setMics] = useState([]);
 
   const handleChange = (event) => {
     // TODO CHECK SESSION ID
@@ -55,6 +54,12 @@ export default function SessionControls(props) {
         console.log(res.data);
         props.getRecordsBySession(res.data);
       });
+
+    axios
+      .get(`http://34.65.77.89:8100/voice/proto/v1/participants?sessionId=` + 1)
+      .then((res) => {
+        setMics(res.data);
+      });
   };
 
   const handleClose = () => {
@@ -73,51 +78,75 @@ export default function SessionControls(props) {
 
   return (
     <div style={{ marginTop: 30, marginLeft: 30 }}>
-      <Typography variant="h6">Choose session to overview</Typography>
+      <Typography variant="h6" style={{ color: "#191414" }}>
+        Choose and save protocols
+      </Typography>
       <Paper
         style={{
           marginTop: 10,
           marginRight: 30,
-          marginBottom: 30,
-          padding: 10,
+          padding: 20,
         }}
       >
-        <Grid
-          container
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={2}
-        >
-          <Grid item style={{ flexGrow: 1 }}>
-            <FormControl variant="outlined" className={classes.formControl}>
-              <InputLabel id="select-session-outlined">Session</InputLabel>
-              <Select
-                labelId="select-session-outlined"
-                id="select-session"
-                value={session}
-                onChange={handleChange}
-                label="Sessions"
-              >
-                <MenuItem value="none">
-                  <em>Choose a session</em>
-                </MenuItem>
-                {sessions.map((item, index) => (
-                  <MenuItem key={item["id"]} value={item["name"]}>
-                    {item["name"]}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+        <Grid container justifyContent="space-between" alignItems="center">
+          <Grid item xs={5}>
+            <Grid container alignItems="center" spacing={2}>
+              <Grid item>
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel id="select-session-outlined">
+                    Browse sessions
+                  </InputLabel>
+                  <Select
+                    labelId="select-session-outlined"
+                    id="select-session"
+                    value={session}
+                    onChange={handleChange}
+                    label="Sessions"
+                  >
+                    <MenuItem value="none">
+                      <em>None</em>
+                    </MenuItem>
+                    {sessions.map((item) => (
+                      <MenuItem key={item["id"]} value={item["name"]}>
+                        {item["name"]}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item style={{ flexGrow: 1 }}>
+                <Autocomplete
+                  multiple
+                  id="participants-get-all"
+                  disableClearable
+                  options={mics.map((option) => option["name"])}
+                  style={{ paddingBottom: 10 }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Filter participants"
+                      margin="normal"
+                      variant="outlined"
+                      InputProps={{ ...params.InputProps, type: "search" }}
+                    />
+                  )}
+                />
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item>
             <Button
-              style={{ backgroundColor: "#03a9f4", color: "#fff" }}
+              style={{
+                backgroundColor:
+                  session === "" || session === "none" ? "#d6d6d6" : "#03a9f4",
+                color: "#fff",
+              }}
               variant="contained"
               startIcon={<SaveIcon />}
               onClick={handleToggle}
               disabled={session === "" || session === "none"}
             >
-              Show Full Document
+              Export Full Document
             </Button>
           </Grid>
         </Grid>

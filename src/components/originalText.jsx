@@ -11,7 +11,9 @@ export default function OriginalText(props) {
         margin: 30,
       }}
     >
-      <Typography variant="h6">Original Transcribed Text</Typography>
+      <Typography variant="h6" style={{ color: "#191414" }}>
+        Original Transcribed Text
+      </Typography>
       <Paper style={{ padding: 20, marginTop: 10 }}>
         {props.sessionID === "" || props.sessionID === "none" ? (
           <Typography>Choose a session to view transcribed text</Typography>

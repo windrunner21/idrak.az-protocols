@@ -11,7 +11,9 @@ export default function AudioTracks(props) {
         margin: 30,
       }}
     >
-      <Typography variant="h6">Original Recorded Audio</Typography>
+      <Typography variant="h6" style={{ color: "#191414" }}>
+        Original Recorded Audio
+      </Typography>
       <Paper style={{ padding: 20, marginTop: 10 }}>
         {props.sessionID === "none" ? (
           <Typography>Choose a session to view audiofiles</Typography>

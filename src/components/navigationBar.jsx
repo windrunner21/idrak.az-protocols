@@ -55,7 +55,7 @@ export default function NavigationBar() {
                 style={{ borderColor: "#03a9f4", color: "#03a9f4" }}
                 variant="outlined"
               >
-                Stenography
+                Protocols
               </Button>
             </Grid>
             <Grid item>

@@ -3,9 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import NavigationBar from "../../components/navigationBar";
 import CopyrightNotSticky from "../../components/copyrightNotSticky";
+import Copyright from "../../components/copyright";
 import SessionControls from "../../components/sessionControls";
 import AudioTracks from "../../components/audioTracks";
-import RoleTags from "../../components/roleTags";
 import OriginalText from "../../components/originalText";
 import EditedText from "../../components/editedText";
 import SaveDocument from "../../components/saveDocument";
@@ -30,8 +30,6 @@ export default function EditPage() {
         getRecordsBySession={setRecordsBySession}
       />
 
-      <RoleTags />
-
       <Grid
         container
         direction="row"
@@ -50,7 +48,7 @@ export default function EditPage() {
       </Grid>
 
       {sessionId !== "none" ? <SaveDocument /> : <div />}
-      <CopyrightNotSticky />
+      {sessionId !== "none" ? <CopyrightNotSticky /> : <Copyright />}
     </div>
   );
 }
