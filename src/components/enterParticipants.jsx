@@ -15,19 +15,39 @@ export default function EnterParticipants(props) {
       >
         <Grid container spacing={5} alignItems="flex-end">
           <Grid item>
-            <AddParticipant role={"Judge"} getName={props.getJudge} />
+            <AddParticipant
+              role={"Judge"}
+              getName={props.getJudge}
+              canDelete={false}
+            />
           </Grid>
           <Grid item>
-            <AddParticipant role={"Prosecutor"} getName={props.getProsecutor} />
+            <AddParticipant
+              role={"Prosecutor"}
+              getName={props.getProsecutor}
+              canDelete={false}
+            />
           </Grid>
           <Grid item>
-            <AddParticipant role={"Lawyer"} getName={props.getLawyer} />
+            <AddParticipant
+              role={"Lawyer"}
+              getName={props.getLawyer}
+              canDelete={false}
+            />
           </Grid>
           <Grid item>
-            <AddParticipant role={"Defendant"} getName={props.getDefendant} />
+            <AddParticipant
+              role={"Defendant"}
+              getName={props.getDefendant}
+              canDelete={false}
+            />
           </Grid>
           <Grid item>
-            <AddParticipant role={"Plaintiff"} getName={props.getPlaintiff} />
+            <AddParticipant
+              role={"Plaintiff"}
+              getName={props.getPlaintiff}
+              canDelete={false}
+            />
           </Grid>
         </Grid>
       </Paper>

@@ -154,8 +154,8 @@ export default function StartSession(props) {
         </AppBar>
         <Grid
           container
-          justifyContent="space-around"
-          alignItems="center"
+          justifyContent="space-between"
+          alignItems="flex-start"
           style={{ padding: 100 }}
         >
           <Grid item>
