@@ -45,7 +45,7 @@ export default function LandingNavigationBar() {
                 style={{ backgroundColor: "#4db6ac", color: "#fff" }}
                 variant="contained"
               >
-                Sign In
+                Authorization
               </Button>
             </Grid>
           </Grid>

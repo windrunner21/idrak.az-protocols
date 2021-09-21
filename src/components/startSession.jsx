@@ -16,9 +16,6 @@ import axios from "axios";
 import AddWitness from "./addWitness";
 
 const useStyles = makeStyles((theme) => ({
-  appBar: {
-    position: "relative",
-  },
   title: {
     marginLeft: theme.spacing(2),
     flex: 1,
@@ -50,6 +47,7 @@ export default function StartSession(props) {
   const [roomName, setRoomName] = useState("");
   const [open, setOpen] = useState(false);
   const [time, setTime] = useState(0);
+  const [pause, setPause] = useState(false);
 
   const handleButtonClick = () => {
     setTimeStamp(moment().toISOString(true));
@@ -83,16 +81,19 @@ export default function StartSession(props) {
       });
 
     setOpen(false);
+    setTime(0);
   };
 
   const handleClose = () => {
     setOpen(false);
+    setTime(0);
+    setPause(false);
   };
 
   useEffect(() => {
     let interval = null;
 
-    if (open) {
+    if (open && !pause) {
       interval = setInterval(() => {
         setTime((prevTime) => prevTime + 10);
       }, 10);
@@ -101,7 +102,7 @@ export default function StartSession(props) {
     }
 
     return () => clearInterval(interval);
-  }, [open]);
+  }, [open, pause]);
 
   return (
     <div style={{ marginLeft: 30, marginRight: 30, marginTop: 30 }}>
@@ -122,7 +123,12 @@ export default function StartSession(props) {
         onClose={handleClose}
         TransitionComponent={Transition}
       >
-        <AppBar className={classes.appBar}>
+        <AppBar
+          style={{
+            position: "relative",
+            backgroundColor: pause ? "#f44336" : "#4caf50",
+          }}
+        >
           <Toolbar>
             <IconButton
               edge="start"
@@ -133,10 +139,19 @@ export default function StartSession(props) {
               <CloseIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              Session in progress
+              Court session is {pause ? "paused" : "in progress"}
             </Typography>
+            <Button
+              autoFocus
+              color="inherit"
+              onClick={() => {
+                setPause(!pause);
+              }}
+            >
+              {pause ? "Continue" : "Pause"} session
+            </Button>
             <Button autoFocus color="inherit" onClick={handleSubmit}>
-              Finish
+              Finish session
             </Button>
           </Toolbar>
         </AppBar>
@@ -147,9 +162,7 @@ export default function StartSession(props) {
           style={{ padding: 100 }}
         >
           <Grid item>
-            <Typography variant="h5">
-              Add Participating Witness in Court
-            </Typography>
+            <Typography variant="h5">Add Participating Witness</Typography>
             <AddWitness />
           </Grid>
           <Grid item>
