@@ -27,7 +27,11 @@ export default function EditedText(props) {
               <Grid item key={index}>
                 <TextField
                   id="outlined-basic"
-                  label={item["mic"]["name"]}
+                  label={
+                    item["participant"] !== null
+                      ? item["participant"]["name"]
+                      : item["mic"]["name"]
+                  }
                   multiline
                   fullWidth
                   variant="outlined"
