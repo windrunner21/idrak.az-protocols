@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Play from "@material-ui/icons/PlayCircleFilledWhite";
@@ -107,16 +106,14 @@ export default function StartSession(props) {
   return (
     <div style={{ marginLeft: 30, marginRight: 30, marginTop: 30 }}>
       <Typography variant="h6">Start Session</Typography>
-      <Paper style={{ padding: 20, marginTop: 10 }}>
-        <Button
-          variant="contained"
-          style={{ backgroundColor: "#03a9f4", color: "#fff" }}
-          startIcon={<Play />}
-          onClick={handleButtonClick}
-        >
-          Start
-        </Button>
-      </Paper>
+      <Button
+        variant="contained"
+        style={{ backgroundColor: "#4caf50", color: "#fff", marginTop: 10 }}
+        startIcon={<Play />}
+        onClick={handleButtonClick}
+      >
+        Start
+      </Button>
       <Dialog
         fullScreen
         open={open}

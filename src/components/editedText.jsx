@@ -14,7 +14,11 @@ export default function EditedText(props) {
       <Typography variant="h6" style={{ color: "#191414" }}>
         Edit Transcribed Text
       </Typography>
-      <Paper style={{ padding: 20, marginTop: 10 }}>
+      <Paper
+        style={{ padding: 20, marginTop: 10 }}
+        elevation={0}
+        variant="outlined"
+      >
         {props.sessionID === "" || props.sessionID === "none" ? (
           <Typography>Choose a session to edit transcribed text</Typography>
         ) : (

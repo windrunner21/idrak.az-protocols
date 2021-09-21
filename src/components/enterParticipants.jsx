@@ -8,7 +8,11 @@ export default function EnterParticipants(props) {
   return (
     <div style={{ marginLeft: 30, marginRight: 30, marginBottom: 30 }}>
       <Typography variant="h6">Enter session participants</Typography>
-      <Paper style={{ padding: 20, marginTop: 10 }}>
+      <Paper
+        style={{ padding: 20, marginTop: 10 }}
+        elevation={0}
+        variant="outlined"
+      >
         <Grid container spacing={5} alignItems="flex-end">
           <Grid item>
             <AddParticipant role={"Judge"} getName={props.getJudge} />

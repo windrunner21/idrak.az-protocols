@@ -87,6 +87,8 @@ export default function SessionControls(props) {
           marginRight: 30,
           padding: 20,
         }}
+        elevation={0}
+        variant="outlined"
       >
         <Grid container justifyContent="space-between" alignItems="center">
           <Grid item xs={5}>

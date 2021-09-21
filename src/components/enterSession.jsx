@@ -27,7 +27,14 @@ export default function EnterSandman(props) {
   return (
     <div style={{ marginLeft: 30, marginRight: 30, marginTop: 30 }}>
       <Typography variant="h6">Enter session details</Typography>
-      <Paper style={{ padding: 20, marginTop: 10 }}>
+      <Paper
+        style={{
+          padding: 20,
+          marginTop: 10,
+        }}
+        elevation={0}
+        variant="outlined"
+      >
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <Grid container alignItems="center" spacing={5}>
             <Grid item>
