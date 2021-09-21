@@ -12,7 +12,7 @@ import SaveDocument from "../../components/saveDocument";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: "#e2e2e2",
+    backgroundColor: "#e1f5fe",
     minHeight: "100vh",
   },
 }));
@@ -32,7 +32,12 @@ export default function EditPage() {
 
       <RoleTags />
 
-      <Grid container alignItems="stretch" justifyContent="space-between">
+      <Grid
+        container
+        direction="row"
+        alignItems="stretch"
+        justifyContent="space-between"
+      >
         <Grid item>
           <AudioTracks sessionID={sessionId} sessionRecords={sessionRecords} />
         </Grid>

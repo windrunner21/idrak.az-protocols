@@ -18,7 +18,7 @@ export default function EditedText(props) {
         ) : (
           <Grid container direction="column" spacing={2}>
             {props.sessionRecords.map((item, index) => (
-              <Grid item>
+              <Grid item key={index}>
                 <TextField
                   id="outlined-basic"
                   label={item["mic"]["name"]}

@@ -4,13 +4,15 @@ import Typography from "@material-ui/core/Typography";
 
 export default function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://idrak.com">
-        Idrak Protocol System
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
+    <div style={{ position: "fixed", width: "100%", bottom: 0, margin: 30 }}>
+      <Typography variant="body2" color="textSecondary" align="center">
+        {"Copyright © "}
+        <Link color="inherit" href="https://idrak.com">
+          Idrak Technology Transfer
+        </Link>{" "}
+        {new Date().getFullYear()}
+        {"."}
+      </Typography>
+    </div>
   );
 }

@@ -24,21 +24,25 @@ export default function LandingNavigationBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{ backgroundColor: "#fff" }}>
+      <AppBar
+        position="static"
+        style={{ backgroundColor: "#fff" }}
+        elevation={0}
+      >
         <Toolbar>
           <Button
             href="/idrak.az-protocols/"
             variant="text"
             className={classes.title}
           >
-            IPS
+            Home
           </Button>
           <Grid container justifyContent="flex-end" spacing={2}>
             <Grid item>
               <Button
                 to="/idrak.az-protocols/sign-in"
                 component={RouterLink}
-                color="primary"
+                style={{ backgroundColor: "#4db6ac", color: "#fff" }}
                 variant="contained"
               >
                 Sign In

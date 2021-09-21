@@ -9,7 +9,7 @@ import StartSession from "../../components/startSession";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: "#e2e2e2",
+    backgroundColor: "#e0f7fa",
     minHeight: "100vh",
   },
 }));

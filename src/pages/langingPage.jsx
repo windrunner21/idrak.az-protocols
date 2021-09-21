@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { Link as RouterLink } from "react-router-dom";
 import LandingNavigationBar from "../components/landingNavigationBar";
+import Copyright from "../components/copyright";
 
 const images = [
   {
@@ -100,9 +101,15 @@ export default function ButtonBases() {
   const classes = useStyles();
 
   return (
-    <>
+    <div style={{ backgroundColor: "#e0f2f1", height: "100vh" }}>
       <LandingNavigationBar />
-      <div align="center" style={{ paddingTop: 100, paddingBottom: 50 }}>
+      <div
+        align="center"
+        style={{
+          paddingTop: 150,
+          paddingBottom: 50,
+        }}
+      >
         <Grid
           container
           direction="column"
@@ -110,7 +117,7 @@ export default function ButtonBases() {
           alignItems="center"
         >
           <Grid item xs={4}>
-            <Typography className={classes.typo} variant="h4">
+            <Typography variant="h2">
               <b>Idrak Protocol System</b>
             </Typography>
           </Grid>
@@ -155,6 +162,7 @@ export default function ButtonBases() {
           </ButtonBase>
         ))}
       </div>
-    </>
+      <Copyright />
+    </div>
   );
 }

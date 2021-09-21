@@ -16,14 +16,22 @@ export default function AudioTracks(props) {
         {props.sessionID === "none" ? (
           <Typography>Choose a session to view audiofiles</Typography>
         ) : (
-          <Grid container direction="column" spacing={2}>
+          <Grid container direction="column" spacing={1}>
             {props.sessionRecords.map((item, index) => (
-              <Grid item>
-                <ReactAudioPlayer
-                  style={{ marginLeft: 10 }}
-                  src={"data:audio/wav;base64," + item["audioRecord"]}
-                  controls
-                />
+              <Grid item key={index}>
+                <Grid container direction="column" spacing={1}>
+                  <Grid item>
+                    <Typography variant="subtitle2">
+                      {item["mic"]["name"]}
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <ReactAudioPlayer
+                      src={"data:audio/wav;base64," + item["audioRecord"]}
+                      controls
+                    />
+                  </Grid>
+                </Grid>
               </Grid>
             ))}
           </Grid>

@@ -24,14 +24,18 @@ export default function NavigationBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{ backgroundColor: "#fff" }}>
+      <AppBar
+        position="static"
+        style={{ backgroundColor: "#fff" }}
+        elevation={0}
+      >
         <Toolbar>
           <Button
             href="/idrak.az-protocols/"
             variant="text"
             className={classes.title}
           >
-            IPS
+            HOME
           </Button>
           <Grid container justifyContent="flex-end" spacing={2}>
             <Grid item>

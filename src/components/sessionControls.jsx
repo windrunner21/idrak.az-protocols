@@ -39,6 +39,16 @@ export default function SessionControls(props) {
     // TODO CHECK SESSION ID
     setSession(event.target.value);
     props.getSession(event.target.value);
+    // try {
+    //   const res = await axios.get(
+    //     `http://34.65.77.89:8100/voice/proto/v1/records?sessionId=` + 1
+    //   );
+    //   console.log(res.data);
+    //   props.getRecordsBySession(res.data);
+    // } catch (err) {
+    //   // Handle Error Here
+    //   console.error(err);
+    // }
     axios
       .get(`http://34.65.77.89:8100/voice/proto/v1/records?sessionId=` + 1)
       .then((res) => {

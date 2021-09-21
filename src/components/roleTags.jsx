@@ -10,9 +10,11 @@ export default function RoleTags() {
 
   useEffect(() => {
     // get all mics
-    axios.get(`http://34.65.77.89:8100/voice/proto/v1/mics`).then((res) => {
-      setMics(res.data);
-    });
+    axios
+      .get(`http://34.65.77.89:8100/voice/proto/v1/participants?sessionId=` + 1)
+      .then((res) => {
+        setMics(res.data);
+      });
   }, []);
 
   return (
