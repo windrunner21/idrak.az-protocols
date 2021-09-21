@@ -79,7 +79,7 @@ export default function SessionControls(props) {
   return (
     <div style={{ marginTop: 30, marginLeft: 30 }}>
       <Typography variant="h6" style={{ color: "#191414" }}>
-        Choose and save protocols
+        Choose Protocols by Court Session
       </Typography>
       <Paper
         style={{
