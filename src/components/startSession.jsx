@@ -299,52 +299,57 @@ export default function StartSession(props) {
             </Button>
           </Toolbar>
         </AppBar>
-        <Grid
-          container
-          justifyContent="space-between"
-          alignItems="flex-start"
-          style={{ padding: 100 }}
-        >
+        <Grid container direction="column">
           <Grid item>
-            <Grid container direction="column" justifyContent="space-between">
+            <Grid
+              container
+              justifyContent="space-between"
+              alignItems="flex-start"
+              style={{ padding: 100 }}
+            >
               <Grid item>
-                <Typography variant="h6">Add Participating Witness</Typography>
-                <AddWitness witnesses={witnesses} getWitnesses={setWitnesses} />
+                <Grid item>
+                  <Typography variant="h6">
+                    Add Participating Witness
+                  </Typography>
+                  <AddWitness
+                    witnesses={witnesses}
+                    getWitnesses={setWitnesses}
+                  />
+                </Grid>
               </Grid>
               <Grid item>
-                <Typography variant="h6">
-                  Listen to Real Time Mic Input
-                </Typography>
-                <RealtimeMics />
+                <Typography variant="h6">Court Session Duration</Typography>
+                <div className={classes.circle}>
+                  <Grid
+                    container
+                    direction="row"
+                    className={classes.timer}
+                    justifyContent="center"
+                  >
+                    <Grid item>
+                      <Typography variant="h2">
+                        {("0" + Math.floor(time / 3600000)).slice(-2)}:
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="h2">
+                        {("0" + Math.floor((time / 60000) % 60)).slice(-2)}:
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="h2">
+                        {("0" + Math.floor((time / 1000) % 60)).slice(-2)}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </div>
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
-            <Typography variant="h6">Court Session Duration</Typography>
-            <div className={classes.circle}>
-              <Grid
-                container
-                direction="row"
-                className={classes.timer}
-                justifyContent="center"
-              >
-                <Grid item>
-                  <Typography variant="h2">
-                    {("0" + Math.floor(time / 3600000)).slice(-2)}:
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography variant="h2">
-                    {("0" + Math.floor((time / 60000) % 60)).slice(-2)}:
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography variant="h2">
-                    {("0" + Math.floor((time / 1000) % 60)).slice(-2)}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </div>
+          <Grid item style={{ margin: 30 }}>
+            <Typography variant="h6">Listen to Real Time Mic Input</Typography>
+            <RealtimeMics />
           </Grid>
         </Grid>
       </Dialog>
