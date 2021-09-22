@@ -42,7 +42,9 @@ export default function EnterSandman(props) {
                 id="session-name"
                 label="Session name"
                 variant="outlined"
-                onChange={handleSessionNameChange}
+                onChange={(event) =>
+                  handleSessionNameChange(event.target.value)
+                }
               />
             </Grid>
             <Grid item>
@@ -50,7 +52,7 @@ export default function EnterSandman(props) {
                 id="room-name"
                 label="Room name"
                 variant="outlined"
-                onChange={handleRoomNameChange}
+                onChange={(event) => handleRoomNameChange(event.target.value)}
               />
             </Grid>
             <Grid item>
@@ -62,7 +64,7 @@ export default function EnterSandman(props) {
                 id="date-picker-inline"
                 label="Choose date"
                 value={props.selectedDate}
-                onChange={handleDateChange}
+                onChange={(date) => handleDateChange(date)}
                 InputAdornmentProps={{ position: "start" }}
                 KeyboardButtonProps={{
                   "aria-label": "change date",
@@ -78,7 +80,7 @@ export default function EnterSandman(props) {
                 InputAdornmentProps={{ position: "start" }}
                 value={props.selectedDate}
                 orientation="landscape"
-                onChange={handleDateChange}
+                onChange={(date) => handleDateChange(date)}
               />
             </Grid>
           </Grid>

@@ -25,7 +25,7 @@ export default function StartPage() {
   const [prosecutorName, setProsecutorName] = useState("");
   const [lawyerName, setLawyerName] = useState("");
   const [defendantName, setDefendantName] = useState("");
-  const [plaintiffName, setPlaintiffName] = useState("");
+  const [hiddenWitness, setHiddenWitnessName] = useState("");
 
   return (
     <div className={classes.root}>
@@ -47,7 +47,7 @@ export default function StartPage() {
                 getProsecutor={setProsecutorName}
                 getLawyer={setLawyerName}
                 getDefendant={setDefendantName}
-                getPlaintiff={setPlaintiffName}
+                getPlaintiff={setHiddenWitnessName}
               />
             </Grid>
           </Grid>
@@ -61,7 +61,7 @@ export default function StartPage() {
             prosecutorName={prosecutorName}
             lawyerName={lawyerName}
             defendantName={defendantName}
-            plaintiffName={plaintiffName}
+            hiddenWitness={hiddenWitness}
           />
         </Grid>
       </Grid>

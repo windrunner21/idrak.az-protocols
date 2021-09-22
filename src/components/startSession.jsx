@@ -13,6 +13,7 @@ import Slide from "@material-ui/core/Slide";
 import moment from "moment";
 import axios from "axios";
 import AddWitness from "./addWitness";
+import RealtimeMics from "./realtimeMics";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -20,9 +21,10 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
   },
   circle: {
+    marginTop: 50,
     display: "flex",
-    width: "500px",
-    height: "500px",
+    width: "450px",
+    height: "450px",
     backgroundColor: "#fff",
     borderRadius: "50%",
     borderStyle: "solid",
@@ -44,6 +46,8 @@ export default function StartSession(props) {
   const [endTimeStamp, setEndTimeStamp] = useState(moment().toISOString(true));
   const [sessionName, setSessionName] = useState("");
   const [roomName, setRoomName] = useState("");
+  const [participants, setParticipants] = useState([]);
+  const [witnesses, setWitnesses] = useState([]);
   const [open, setOpen] = useState(false);
   const [time, setTime] = useState(0);
   const [pause, setPause] = useState(false);
@@ -52,12 +56,6 @@ export default function StartSession(props) {
     setTimeStamp(moment().toISOString(true));
     setSessionName(props.sessionName);
     setRoomName(props.roomName);
-
-    console.log(sessionName);
-    console.log(roomName);
-    console.log(props.selectedDate);
-    console.log(timeStamp);
-
     setOpen(true);
   };
 
@@ -65,15 +63,160 @@ export default function StartSession(props) {
   const handleSubmit = () => {
     setEndTimeStamp(moment().toISOString(true));
 
-    const body = {
+    // pushing participants - judge
+    participants.push({
+      participant: {
+        id: 1,
+        version: 0,
+        name: props.judgeName,
+        type: "JUDGE",
+        session: {
+          id: 1,
+          version: 0,
+          name: sessionName,
+          startDate: timeStamp,
+          endDate: endTimeStamp,
+          room: roomName,
+        },
+      },
+    });
+
+    // pushing participants - prosecutor
+    participants.push({
+      participant: {
+        id: 2,
+        version: 0,
+        name: props.prosecutorName,
+        type: "PROSECUTOR",
+        session: {
+          id: 1,
+          version: 0,
+          name: sessionName,
+          startDate: timeStamp,
+          endDate: endTimeStamp,
+          room: roomName,
+        },
+      },
+    });
+
+    // pushing participants - lawyer
+    participants.push({
+      participant: {
+        id: 3,
+        version: 0,
+        name: props.lawyerName,
+        type: "ADVOCATE",
+        session: {
+          id: 1,
+          version: 0,
+          name: sessionName,
+          startDate: timeStamp,
+          endDate: endTimeStamp,
+          room: roomName,
+        },
+      },
+    });
+
+    // pushing participants - defendant
+    participants.push({
+      participant: {
+        id: 4,
+        version: 0,
+        name: props.defendantName,
+        type: "DEFENDANT",
+        session: {
+          id: 1,
+          version: 0,
+          name: sessionName,
+          startDate: timeStamp,
+          endDate: endTimeStamp,
+          room: roomName,
+        },
+      },
+    });
+
+    // pushing participants - hidden witness
+    participants.push({
+      participant: {
+        id: 6,
+        version: 0,
+        name: props.hiddenWitness,
+        type: "HIDDEN_WITNESS",
+        session: {
+          id: 1,
+          version: 0,
+          name: sessionName,
+          startDate: timeStamp,
+          endDate: endTimeStamp,
+          room: roomName,
+        },
+      },
+    });
+
+    setParticipants(participants);
+
+    console.log(witnesses);
+
+    const createSession = {
       name: sessionName,
       startDate: timeStamp,
       endDate: endTimeStamp,
-      room: null,
+      room: roomName,
+    };
+
+    const createJudge = {
+      type: participants[0].participant.type,
+      name: participants[0].participant.name,
+      session: {
+        id: 1,
+      },
+    };
+
+    const createHiddenWitness = {
+      type: participants[4].participant.type,
+      name: participants[4].participant.name,
+      session: {
+        id: 1,
+      },
+    };
+
+    const createWitness = {
+      type: witnesses[0].type,
+      name: witnesses[0].fullName,
+      session: {
+        id: 1,
+      },
     };
 
     axios
-      .post(`http://34.65.77.89:8100/voice/proto/v1/sessions`, body)
+      .post(`http://34.65.77.89:8100/voice/proto/v1/sessions`, createSession)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+      });
+
+    axios
+      .post(`http://34.65.77.89:8100/voice/proto/v1/participants`, createJudge)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+      });
+
+    axios
+      .post(
+        `http://34.65.77.89:8100/voice/proto/v1/participants`,
+        createHiddenWitness
+      )
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+      });
+
+    axios
+      .post(
+        `http://34.65.77.89:8100/voice/proto/v1/participants`,
+        createWitness
+      )
       .then((res) => {
         console.log(res);
         console.log(res.data);
@@ -81,12 +224,16 @@ export default function StartSession(props) {
 
     setOpen(false);
     setTime(0);
+    setParticipants([]);
+    setWitnesses([]);
   };
 
   const handleClose = () => {
     setOpen(false);
     setTime(0);
     setPause(false);
+    setParticipants([]);
+    setWitnesses([]);
   };
 
   useEffect(() => {
@@ -159,10 +306,21 @@ export default function StartSession(props) {
           style={{ padding: 100 }}
         >
           <Grid item>
-            <Typography variant="h5">Add Participating Witness</Typography>
-            <AddWitness />
+            <Grid container direction="column" justifyContent="space-between">
+              <Grid item>
+                <Typography variant="h6">Add Participating Witness</Typography>
+                <AddWitness witnesses={witnesses} getWitnesses={setWitnesses} />
+              </Grid>
+              <Grid item>
+                <Typography variant="h6">
+                  Listen to Real Time Mic Input
+                </Typography>
+                <RealtimeMics />
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item>
+            <Typography variant="h6">Court Session Duration</Typography>
             <div className={classes.circle}>
               <Grid
                 container
