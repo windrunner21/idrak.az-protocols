@@ -1,29 +1,29 @@
 {
   "files": {
     "main.css": "/idrak.az-protocols/static/css/main.a617e044.chunk.css",
-    "main.js": "/idrak.az-protocols/static/js/main.b0d83ea9.chunk.js",
-    "main.js.map": "/idrak.az-protocols/static/js/main.b0d83ea9.chunk.js.map",
-    "runtime-main.js": "/idrak.az-protocols/static/js/runtime-main.1a6f0727.js",
-    "runtime-main.js.map": "/idrak.az-protocols/static/js/runtime-main.1a6f0727.js.map",
+    "main.js": "/idrak.az-protocols/static/js/main.4c086ba2.chunk.js",
+    "main.js.map": "/idrak.az-protocols/static/js/main.4c086ba2.chunk.js.map",
+    "runtime-main.js": "/idrak.az-protocols/static/js/runtime-main.64cb14f7.js",
+    "runtime-main.js.map": "/idrak.az-protocols/static/js/runtime-main.64cb14f7.js.map",
     "static/css/2.ba2f4b51.chunk.css": "/idrak.az-protocols/static/css/2.ba2f4b51.chunk.css",
-    "static/js/2.59bc2d49.chunk.js": "/idrak.az-protocols/static/js/2.59bc2d49.chunk.js",
-    "static/js/2.59bc2d49.chunk.js.map": "/idrak.az-protocols/static/js/2.59bc2d49.chunk.js.map",
-    "static/js/3.e9ff654c.chunk.js": "/idrak.az-protocols/static/js/3.e9ff654c.chunk.js",
-    "static/js/3.e9ff654c.chunk.js.map": "/idrak.az-protocols/static/js/3.e9ff654c.chunk.js.map",
+    "static/js/2.41e32877.chunk.js": "/idrak.az-protocols/static/js/2.41e32877.chunk.js",
+    "static/js/2.41e32877.chunk.js.map": "/idrak.az-protocols/static/js/2.41e32877.chunk.js.map",
+    "static/js/3.34408bc3.chunk.js": "/idrak.az-protocols/static/js/3.34408bc3.chunk.js",
+    "static/js/3.34408bc3.chunk.js.map": "/idrak.az-protocols/static/js/3.34408bc3.chunk.js.map",
     "index.html": "/idrak.az-protocols/index.html",
     "static/css/2.ba2f4b51.chunk.css.map": "/idrak.az-protocols/static/css/2.ba2f4b51.chunk.css.map",
     "static/css/main.a617e044.chunk.css.map": "/idrak.az-protocols/static/css/main.a617e044.chunk.css.map",
-    "static/js/2.59bc2d49.chunk.js.LICENSE.txt": "/idrak.az-protocols/static/js/2.59bc2d49.chunk.js.LICENSE.txt",
+    "static/js/2.41e32877.chunk.js.LICENSE.txt": "/idrak.az-protocols/static/js/2.41e32877.chunk.js.LICENSE.txt",
     "static/media/300.css": "/idrak.az-protocols/static/media/roboto-vietnamese-300-normal.af9afdc1.woff2",
     "static/media/400.css": "/idrak.az-protocols/static/media/roboto-vietnamese-400-normal.c0bec65d.woff2",
     "static/media/500.css": "/idrak.az-protocols/static/media/roboto-vietnamese-500-normal.b8e494da.woff2",
     "static/media/700.css": "/idrak.az-protocols/static/media/roboto-vietnamese-700-normal.3096f18a.woff2"
   },
   "entrypoints": [
-    "static/js/runtime-main.1a6f0727.js",
+    "static/js/runtime-main.64cb14f7.js",
     "static/css/2.ba2f4b51.chunk.css",
-    "static/js/2.59bc2d49.chunk.js",
+    "static/js/2.41e32877.chunk.js",
     "static/css/main.a617e044.chunk.css",
-    "static/js/main.b0d83ea9.chunk.js"
+    "static/js/main.4c086ba2.chunk.js"
   ]
 }
