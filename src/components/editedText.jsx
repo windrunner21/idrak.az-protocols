@@ -37,12 +37,32 @@ export default function EditedText(props) {
   const handleClose = (value, index) => {
     setOpen(false);
 
-    selectedValue.forEach((element) => {
-      if (element.index !== index) {
-        selectedValue.push({ index: index, name: value });
-        setSelectedValue(selectedValue);
-      }
-    });
+    if (selectedValue.length === 0) {
+      selectedValue.push({ index: index, name: value });
+      setSelectedValue(selectedValue);
+    } else {
+      selectedValue.forEach((element) => {
+        var contains = false;
+
+        var BreakException = {};
+
+        try {
+          selectedValue.forEach((element) => {
+            if (element.index === index) {
+              contains = true;
+              throw BreakException;
+            }
+          });
+        } catch (e) {
+          if (e !== BreakException) throw e;
+        }
+
+        if (!contains) {
+          selectedValue.push({ index: index, name: value });
+          setSelectedValue(selectedValue);
+        }
+      });
+    }
   };
 
   // get all participants
@@ -73,25 +93,7 @@ export default function EditedText(props) {
         ) : (
           <Grid container direction="column" spacing={2}>
             {props.sessionRecords.map((item, index) => {
-              selectedValue.forEach((element) => {
-                if (element.index === index) {
-                  return (
-                    <Grid item key={index}>
-                      <TextField
-                        id="outlined-basic"
-                        label={element.name}
-                        multiline
-                        fullWidth
-                        variant="outlined"
-                        defaultValue={item["transriptionEdited"]}
-                        onChange={(event) => handleInputChange(event, index)}
-                      />
-                    </Grid>
-                  );
-                }
-              });
-
-              return (
+              var textField = (
                 <Grid item key={index}>
                   <Grid container alignItems="center" spacing={1}>
                     <Grid item style={{ flexGrow: 1 }}>
@@ -134,6 +136,26 @@ export default function EditedText(props) {
                   </Grid>
                 </Grid>
               );
+
+              selectedValue.forEach((element) => {
+                if (element.index === index) {
+                  textField = (
+                    <Grid item key={index}>
+                      <TextField
+                        id="outlined-basic"
+                        label={element.name}
+                        multiline
+                        fullWidth
+                        variant="outlined"
+                        defaultValue={item["transriptionEdited"]}
+                        onChange={(event) => handleInputChange(event, index)}
+                      />
+                    </Grid>
+                  );
+                }
+              });
+
+              return textField;
             })}
           </Grid>
         )}
