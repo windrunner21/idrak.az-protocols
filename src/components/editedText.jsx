@@ -18,7 +18,8 @@ import axios from "axios";
 export default function EditedText(props) {
   const [participants, setParticipants] = useState([]);
   const [open, setOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState("none");
+  const [selectedValue, setSelectedValue] = useState([]);
+  const [globalIndex, setIndex] = useState(-1);
 
   // handle edited texts
   const handleInputChange = (e, index) => {
@@ -28,14 +29,20 @@ export default function EditedText(props) {
     props.getRecordsToExport(list);
   };
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (index) => {
     setOpen(true);
-    setSelectedValue("none");
+    setIndex(index);
   };
 
-  const handleClose = (value) => {
+  const handleClose = (value, index) => {
     setOpen(false);
-    setSelectedValue(value);
+
+    selectedValue.forEach((element) => {
+      if (element.index !== index) {
+        selectedValue.push({ index: index, name: value });
+        setSelectedValue(selectedValue);
+      }
+    });
   };
 
   // get all participants
@@ -65,27 +72,35 @@ export default function EditedText(props) {
           <Typography>Choose a session to edit transcribed text</Typography>
         ) : (
           <Grid container direction="column" spacing={2}>
-            {props.sessionRecords.map((item, index) => (
-              <Grid item key={index}>
-                <Grid container alignItems="center" spacing={1}>
-                  <Grid item style={{ flexGrow: 1 }}>
-                    {item["participant"] !== null ? (
+            {props.sessionRecords.map((item, index) => {
+              selectedValue.forEach((element) => {
+                if (element.index === index) {
+                  return (
+                    <Grid item key={index}>
                       <TextField
                         id="outlined-basic"
-                        label={item["participant"]["name"]}
+                        label={element.name}
                         multiline
                         fullWidth
                         variant="outlined"
                         defaultValue={item["transriptionEdited"]}
                         onChange={(event) => handleInputChange(event, index)}
                       />
-                    ) : (
+                    </Grid>
+                  );
+                }
+              });
+
+              return (
+                <Grid item key={index}>
+                  <Grid container alignItems="center" spacing={1}>
+                    <Grid item style={{ flexGrow: 1 }}>
                       <TextField
                         id="outlined-basic"
                         label={
-                          selectedValue === "none"
-                            ? item["mic"]["name"]
-                            : selectedValue
+                          item["participant"] !== null
+                            ? item["participant"]["name"]
+                            : item["mic"]["name"]
                         }
                         multiline
                         fullWidth
@@ -93,29 +108,33 @@ export default function EditedText(props) {
                         defaultValue={item["transriptionEdited"]}
                         onChange={(event) => handleInputChange(event, index)}
                       />
+                    </Grid>
+                    {item["participant"] !== null ? (
+                      <div />
+                    ) : (
+                      <Grid item>
+                        <IconButton
+                          size="small"
+                          onClick={() => handleClickOpen(index)}
+                        >
+                          <WarningIcon
+                            fontSize="small"
+                            style={{ color: "#ffc107" }}
+                          />
+                        </IconButton>
+                        <SimpleDialog
+                          participants={participants}
+                          selectedValue={selectedValue}
+                          open={open}
+                          onClose={handleClose}
+                          index={globalIndex}
+                        />
+                      </Grid>
                     )}
                   </Grid>
-                  {item["participant"] !== null || selectedValue !== "none" ? (
-                    <div />
-                  ) : (
-                    <Grid item>
-                      <IconButton size="small" onClick={handleClickOpen}>
-                        <WarningIcon
-                          fontSize="small"
-                          style={{ color: "#ffc107" }}
-                        />
-                      </IconButton>
-                      <SimpleDialog
-                        participants={participants}
-                        selectedValue={selectedValue}
-                        open={open}
-                        onClose={handleClose}
-                      />
-                    </Grid>
-                  )}
                 </Grid>
-              </Grid>
-            ))}
+              );
+            })}
           </Grid>
         )}
       </Paper>
@@ -129,7 +148,7 @@ function SimpleDialog(props) {
   };
 
   const handleListItemClick = (value) => {
-    props.onClose(value);
+    props.onClose(value, props.index);
   };
 
   return (
