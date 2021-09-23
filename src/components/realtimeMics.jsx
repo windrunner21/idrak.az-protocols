@@ -1,24 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 
 export default function RealtimeMics() {
   const [realDataJudge, setRealDataJudge] = useState([]);
   const [realDataWitness, setRealDataWitness] = useState([]);
   const [realDataHiddenWitness, setRealDataHiddenWitness] = useState([]);
 
+  const evtSrc = useRef(null);
+  const listenEvt = useCallback(() => {
+    if (!evtSrc.current) {
+      evtSrc.current = new EventSource(
+        "http://34.65.77.89:8100/voice/proto/v1/notification"
+      );
+    }
+  }, []);
+
   useEffect(() => {
     // get all notifications
-    const sse = new EventSource(
-      "http://34.65.77.89:8100/voice/proto/v1/notification",
-      {
-        withCredentials: false,
-      }
-    );
+    listenEvt();
 
     function getRealtimeData(data) {
       // process the data here,
       // then pass it to state to be rendered
+      console.log(data);
       if (data["mic"] === "Judge") {
         realDataJudge.push(data["text"]);
         setRealDataJudge(realDataJudge);
@@ -34,16 +40,17 @@ export default function RealtimeMics() {
         setRealDataHiddenWitness(realDataHiddenWitness);
       }
     }
-    sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
-    sse.onerror = () => {
+    evtSrc.current.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
+    evtSrc.current.onerror = (e) => {
       // error log here
+      console.log(e.type);
+      evtSrc.current.close();
+    };
 
-      sse.close();
-    };
     return () => {
-      sse.close();
+      evtSrc.current.close();
     };
-  }, [realDataHiddenWitness, realDataJudge, realDataWitness]);
+  }, [listenEvt, realDataHiddenWitness, realDataJudge, realDataWitness]);
 
   return (
     <Grid
@@ -53,33 +60,36 @@ export default function RealtimeMics() {
       style={{ marginTop: 15, flexGrow: 1 }}
     >
       <Grid item>
+        <Typography variant="subtitle2">Judge Mic</Typography>
         <TextField
           id="outlined-basic"
-          label={"Judge Mic"}
           multiline
           fullWidth
+          disabled
           variant="outlined"
-          defaultValue={realDataJudge}
+          value={realDataJudge}
         />
       </Grid>
       <Grid item>
+        <Typography variant="subtitle2">Witness Mic</Typography>
         <TextField
           id="outlined-basic"
-          label={"Witness Mic"}
           multiline
           fullWidth
+          disabled
           variant="outlined"
-          defaultValue={realDataWitness}
+          value={realDataWitness}
         />
       </Grid>
       <Grid item>
+        <Typography variant="subtitle2">Hidden Witness Mic</Typography>
         <TextField
           id="outlined-basic"
-          label={"Hidden Witness Mic"}
           multiline
           fullWidth
+          disabled
           variant="outlined"
-          defaultValue={realDataHiddenWitness}
+          value={realDataHiddenWitness}
         />
       </Grid>
     </Grid>

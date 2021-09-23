@@ -31,7 +31,8 @@ export default function SaveDocument(props) {
 
       axios
         .put(
-          `http://34.65.77.89:8100/voice/proto/v1/records/` + (index + 1),
+          `http://34.65.77.89:8100/voice/proto/v1/records/` +
+            props.recordsToExport[index]["id"],
           updateText
         )
         .then((res) => {

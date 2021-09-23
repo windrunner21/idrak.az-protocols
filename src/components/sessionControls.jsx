@@ -29,6 +29,7 @@ export default function SessionControls(props) {
   const classes = useStyles();
 
   const [session, setSession] = useState("");
+  const [sessionID, setSessionID] = useState(-1);
   const [open, setOpen] = useState(false);
   // rest api variables
   const [sessions, setSessions] = useState([]);
@@ -36,10 +37,10 @@ export default function SessionControls(props) {
   const [fullDocument, setDocument] = useState("");
 
   const handleChange = (event) => {
-    // TODO CHECK SESSION ID
     const { myValue } = event.currentTarget.dataset;
     setSession(event.target.value);
     props.getSession(myValue);
+    setSessionID(myValue);
 
     axios
       .get(
@@ -51,6 +52,7 @@ export default function SessionControls(props) {
         res.data.forEach((element) => {
           props.recordsToExport.push({
             editedText: element["transriptionEdited"],
+            id: element["id"],
           });
           props.getRecordsToExport(props.recordsToExport);
         });
@@ -74,9 +76,10 @@ export default function SessionControls(props) {
     axios
       .get(
         `http://34.65.77.89:8100/voice/proto/v1/fullrecord?sessionId=` +
-          props.sessionID
+          sessionID
       )
       .then((res) => {
+        console.log(res.data);
         setDocument(res.data);
       });
   };

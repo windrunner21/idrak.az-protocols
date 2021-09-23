@@ -43,7 +43,6 @@ export default function StartSession(props) {
   const classes = useStyles();
 
   const [timeStamp, setTimeStamp] = useState(moment().toISOString(true));
-  const [endTimeStamp, setEndTimeStamp] = useState(moment().toISOString(true));
   const [sessionName, setSessionName] = useState("");
   const [roomName, setRoomName] = useState("");
   const [participants, setParticipants] = useState([]);
@@ -61,8 +60,6 @@ export default function StartSession(props) {
 
   // post request to add session
   const handleSubmit = () => {
-    setEndTimeStamp(moment().toISOString(true));
-
     // pushing participants - judge
     participants.push({
       participant: {
@@ -75,7 +72,7 @@ export default function StartSession(props) {
           version: 0,
           name: sessionName,
           startDate: timeStamp,
-          endDate: endTimeStamp,
+          endDate: moment().toISOString(true),
           room: roomName,
         },
       },
@@ -93,7 +90,7 @@ export default function StartSession(props) {
           version: 0,
           name: sessionName,
           startDate: timeStamp,
-          endDate: endTimeStamp,
+          endDate: moment().toISOString(true),
           room: roomName,
         },
       },
@@ -111,7 +108,7 @@ export default function StartSession(props) {
           version: 0,
           name: sessionName,
           startDate: timeStamp,
-          endDate: endTimeStamp,
+          endDate: moment().toISOString(true),
           room: roomName,
         },
       },
@@ -129,7 +126,7 @@ export default function StartSession(props) {
           version: 0,
           name: sessionName,
           startDate: timeStamp,
-          endDate: endTimeStamp,
+          endDate: moment().toISOString(true),
           room: roomName,
         },
       },
@@ -147,7 +144,7 @@ export default function StartSession(props) {
           version: 0,
           name: sessionName,
           startDate: timeStamp,
-          endDate: endTimeStamp,
+          endDate: moment().toISOString(true),
           room: roomName,
         },
       },
@@ -158,7 +155,7 @@ export default function StartSession(props) {
     const createSession = {
       name: sessionName,
       startDate: timeStamp,
-      endDate: endTimeStamp,
+      endDate: moment().toISOString(true),
     };
 
     axios

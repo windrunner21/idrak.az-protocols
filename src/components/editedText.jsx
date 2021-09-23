@@ -34,12 +34,30 @@ export default function EditedText(props) {
     setIndex(index);
   };
 
-  const handleClose = (value, index) => {
+  const handleClose = (value, index, id) => {
     setOpen(false);
 
     if (selectedValue.length === 0) {
       selectedValue.push({ index: index, name: value });
       setSelectedValue(selectedValue);
+
+      const updateText = {
+        transriptionEdited: props.recordsToExport[index]["editedText"],
+        participant: {
+          id: id,
+        },
+      };
+
+      axios
+        .put(
+          `http://34.65.77.89:8100/voice/proto/v1/records/` +
+            props.recordsToExport[index]["id"],
+          updateText
+        )
+        .then((res) => {
+          console.log(res);
+          console.log(res.data);
+        });
     } else {
       selectedValue.forEach((element) => {
         var contains = false;
@@ -60,6 +78,25 @@ export default function EditedText(props) {
         if (!contains) {
           selectedValue.push({ index: index, name: value });
           setSelectedValue(selectedValue);
+
+          const updateText = {
+            transriptionEdited: props.recordsToExport[index]["editedText"],
+            participant: {
+              id: id,
+            },
+          };
+
+          console.log(updateText);
+          axios
+            .put(
+              `http://34.65.77.89:8100/voice/proto/v1/records/` +
+                props.recordsToExport[index]["id"],
+              updateText
+            )
+            .then((res) => {
+              console.log(res);
+              console.log(res.data);
+            });
         }
       });
     }
@@ -172,8 +209,8 @@ function SimpleDialog(props) {
     props.onClose(props.selectedValue);
   };
 
-  const handleListItemClick = (value) => {
-    props.onClose(value, props.index);
+  const handleListItemClick = (value, id) => {
+    props.onClose(value, props.index, id);
   };
 
   return (
@@ -189,7 +226,7 @@ function SimpleDialog(props) {
         {props.participants.map((person) => (
           <ListItem
             button
-            onClick={() => handleListItemClick(person["name"])}
+            onClick={() => handleListItemClick(person["name"], person["id"])}
             key={person["name"]}
           >
             <ListItemAvatar>
