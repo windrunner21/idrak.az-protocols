@@ -9,11 +9,11 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Backdrop from "@material-ui/core/Backdrop";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import SaveIcon from "@material-ui/icons/InsertDriveFile";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import axios from "axios";
+import PDFDocument from "./pdfDocument";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -33,26 +33,24 @@ export default function SessionControls(props) {
   // rest api variables
   const [sessions, setSessions] = useState([]);
   const [mics, setMics] = useState([]);
+  const [fullDocument, setDocument] = useState("");
 
   const handleChange = (event) => {
     // TODO CHECK SESSION ID
     setSession(event.target.value);
     props.getSession(event.target.value);
-    // try {
-    //   const res = await axios.get(
-    //     `http://34.65.77.89:8100/voice/proto/v1/records?sessionId=` + 1
-    //   );
-    //   console.log(res.data);
-    //   props.getRecordsBySession(res.data);
-    // } catch (err) {
-    //   // Handle Error Here
-    //   console.error(err);
-    // }
+
     axios
       .get(`http://34.65.77.89:8100/voice/proto/v1/records?sessionId=` + 1)
       .then((res) => {
-        console.log(res.data);
         props.getRecordsBySession(res.data);
+
+        res.data.forEach((element) => {
+          props.recordsToExport.push({
+            editedText: element["transriptionEdited"],
+          });
+          props.getRecordsToExport(props.recordsToExport);
+        });
       });
 
     axios
@@ -67,6 +65,12 @@ export default function SessionControls(props) {
   };
   const handleToggle = () => {
     setOpen(!open);
+    axios
+      .get(`http://34.65.77.89:8100/voice/proto/v1/fullrecord?sessionId=` + 1)
+      .then((res) => {
+        setDocument(res.data);
+        console.log(fullDocument);
+      });
   };
 
   useEffect(() => {
@@ -154,7 +158,7 @@ export default function SessionControls(props) {
         </Grid>
       </Paper>
       <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
-        <CircularProgress color="inherit" />
+        <PDFDocument document={fullDocument} />
       </Backdrop>
     </div>
   );

@@ -21,6 +21,7 @@ export default function EditPage() {
   const classes = useStyles();
   const [sessionId, setSessionId] = useState("none");
   const [sessionRecords, setRecordsBySession] = useState([]);
+  const [recordsToExport, setRecordsToExport] = useState([]);
 
   return (
     <div className={classes.root}>
@@ -28,6 +29,8 @@ export default function EditPage() {
       <SessionControls
         getSession={setSessionId}
         getRecordsBySession={setRecordsBySession}
+        recordsToExport={recordsToExport}
+        getRecordsToExport={setRecordsToExport}
       />
 
       <Grid
@@ -43,11 +46,24 @@ export default function EditPage() {
           <OriginalText sessionID={sessionId} sessionRecords={sessionRecords} />
         </Grid>
         <Grid item style={{ flexGrow: 1 }}>
-          <EditedText sessionID={sessionId} sessionRecords={sessionRecords} />
+          <EditedText
+            sessionID={sessionId}
+            sessionRecords={sessionRecords}
+            recordsToExport={recordsToExport}
+            getRecordsToExport={setRecordsToExport}
+          />
         </Grid>
       </Grid>
 
-      {sessionId !== "none" ? <SaveDocument /> : <div />}
+      {sessionId !== "none" ? (
+        <SaveDocument
+          sessionRecords={sessionRecords}
+          recordsToExport={recordsToExport}
+          getRecordsToExport={setRecordsToExport}
+        />
+      ) : (
+        <div />
+      )}
       {sessionId !== "none" ? <CopyrightNotSticky /> : <Copyright />}
     </div>
   );

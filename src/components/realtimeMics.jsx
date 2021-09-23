@@ -3,21 +3,36 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 
 export default function RealtimeMics() {
-  const [realData, setRealData] = useState("");
+  const [realDataJudge, setRealDataJudge] = useState([]);
+  const [realDataWitness, setRealDataWitness] = useState([]);
+  const [realDataHiddenWitness, setRealDataHiddenWitness] = useState([]);
 
   useEffect(() => {
     // get all notifications
     const sse = new EventSource(
       "http://34.65.77.89:8100/voice/proto/v1/notification",
       {
-        withCredentials: true,
+        withCredentials: false,
       }
     );
 
     function getRealtimeData(data) {
       // process the data here,
       // then pass it to state to be rendered
-      setRealData(data);
+      if (data["mic"] === "Judge") {
+        realDataJudge.push(data["text"]);
+        setRealDataJudge(realDataJudge);
+      }
+
+      if (data["mic"] === "Witness") {
+        realDataWitness.push(data["text"]);
+        setRealDataWitness(realDataWitness);
+      }
+
+      if (data["mic"] === "Hidden Witness") {
+        realDataHiddenWitness.push(data["text"]);
+        setRealDataHiddenWitness(realDataHiddenWitness);
+      }
     }
     sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
     sse.onerror = () => {
@@ -28,7 +43,7 @@ export default function RealtimeMics() {
     return () => {
       sse.close();
     };
-  }, []);
+  }, [realDataHiddenWitness, realDataJudge, realDataWitness]);
 
   return (
     <Grid
@@ -44,7 +59,7 @@ export default function RealtimeMics() {
           multiline
           fullWidth
           variant="outlined"
-          defaultValue={realData}
+          defaultValue={realDataJudge}
         />
       </Grid>
       <Grid item>
@@ -54,7 +69,7 @@ export default function RealtimeMics() {
           multiline
           fullWidth
           variant="outlined"
-          defaultValue={realData}
+          defaultValue={realDataWitness}
         />
       </Grid>
       <Grid item>
@@ -64,7 +79,7 @@ export default function RealtimeMics() {
           multiline
           fullWidth
           variant="outlined"
-          defaultValue={realData}
+          defaultValue={realDataHiddenWitness}
         />
       </Grid>
     </Grid>
