@@ -68,11 +68,14 @@ export default function EditedText(props) {
   // get all participants
   useEffect(() => {
     axios
-      .get(`http://34.65.77.89:8100/voice/proto/v1/participants?sessionId=` + 1)
+      .get(
+        `http://34.65.77.89:8100/voice/proto/v1/participants?sessionId=` +
+          props.sessionID
+      )
       .then((res) => {
         setParticipants(res.data);
       });
-  }, []);
+  }, [props.sessionID]);
 
   return (
     <div

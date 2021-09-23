@@ -6,13 +6,21 @@ import {
   Document,
   StyleSheet,
   PDFViewer,
+  Font,
 } from "@react-pdf/renderer";
+
+// Register font
+Font.register({
+  family: "Roboto",
+  src: "https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-light-webfont.ttf",
+});
 
 // Create styles
 const styles = StyleSheet.create({
   page: {
     flexDirection: "row",
     backgroundColor: "#E4E4E4",
+    fontFamily: "Roboto",
   },
   section: {
     margin: 10,
@@ -26,21 +34,15 @@ export default function PDFDocument(props) {
   const MyDocument = () => (
     <Document>
       <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <Text>Idrak Protocol System</Text>
-        </View>
-        <View style={styles.section}>
-          <Text>auto generateds</Text>
-        </View>
         <View>
-          <Text>{props.document}</Text>
+          <Text style={styles.section}>{props.document}</Text>
         </View>
       </Page>
     </Document>
   );
 
   return (
-    <PDFViewer>
+    <PDFViewer width={650} height={900}>
       <MyDocument />
     </PDFViewer>
   );

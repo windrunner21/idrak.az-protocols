@@ -37,11 +37,14 @@ export default function SessionControls(props) {
 
   const handleChange = (event) => {
     // TODO CHECK SESSION ID
+    const { myValue } = event.currentTarget.dataset;
     setSession(event.target.value);
-    props.getSession(event.target.value);
+    props.getSession(myValue);
 
     axios
-      .get(`http://34.65.77.89:8100/voice/proto/v1/records?sessionId=` + 1)
+      .get(
+        `http://34.65.77.89:8100/voice/proto/v1/records?sessionId=` + myValue
+      )
       .then((res) => {
         props.getRecordsBySession(res.data);
 
@@ -54,7 +57,10 @@ export default function SessionControls(props) {
       });
 
     axios
-      .get(`http://34.65.77.89:8100/voice/proto/v1/participants?sessionId=` + 1)
+      .get(
+        `http://34.65.77.89:8100/voice/proto/v1/participants?sessionId=` +
+          myValue
+      )
       .then((res) => {
         setMics(res.data);
       });
@@ -66,10 +72,12 @@ export default function SessionControls(props) {
   const handleToggle = () => {
     setOpen(!open);
     axios
-      .get(`http://34.65.77.89:8100/voice/proto/v1/fullrecord?sessionId=` + 1)
+      .get(
+        `http://34.65.77.89:8100/voice/proto/v1/fullrecord?sessionId=` +
+          props.sessionID
+      )
       .then((res) => {
         setDocument(res.data);
-        console.log(fullDocument);
       });
   };
 
@@ -113,7 +121,11 @@ export default function SessionControls(props) {
                       <em>None</em>
                     </MenuItem>
                     {sessions.map((item) => (
-                      <MenuItem key={item["id"]} value={item["name"]}>
+                      <MenuItem
+                        data-my-value={item["id"]}
+                        key={item["id"]}
+                        value={item["name"]}
+                      >
                         {item["name"]}
                       </MenuItem>
                     ))}

@@ -9,7 +9,10 @@ import axios from "axios";
 export default function SaveDocument(props) {
   const handleCancel = () => {
     axios
-      .get(`http://34.65.77.89:8100/voice/proto/v1/records?sessionId=` + 1)
+      .get(
+        `http://34.65.77.89:8100/voice/proto/v1/records?sessionId=` +
+          props.sessionID
+      )
       .then((res) => {
         res.data.forEach((element) => {
           props.recordsToExport.push({

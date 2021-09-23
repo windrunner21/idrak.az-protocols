@@ -155,71 +155,67 @@ export default function StartSession(props) {
 
     setParticipants(participants);
 
-    console.log(witnesses);
-
     const createSession = {
       name: sessionName,
       startDate: timeStamp,
       endDate: endTimeStamp,
-      room: roomName,
-    };
-
-    const createJudge = {
-      type: participants[0].participant.type,
-      name: participants[0].participant.name,
-      session: {
-        id: 1,
-      },
-    };
-
-    const createHiddenWitness = {
-      type: participants[4].participant.type,
-      name: participants[4].participant.name,
-      session: {
-        id: 1,
-      },
-    };
-
-    const createWitness = {
-      type: witnesses[0].type,
-      name: witnesses[0].fullName,
-      session: {
-        id: 1,
-      },
     };
 
     axios
       .post(`http://34.65.77.89:8100/voice/proto/v1/sessions`, createSession)
       .then((res) => {
         console.log(res);
-        console.log(res.data);
-      });
 
-    axios
-      .post(`http://34.65.77.89:8100/voice/proto/v1/participants`, createJudge)
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-      });
+        const createJudge = {
+          type: participants[0].participant.type,
+          name: participants[0].participant.name,
+          session: {
+            id: res.data["id"],
+          },
+        };
 
-    axios
-      .post(
-        `http://34.65.77.89:8100/voice/proto/v1/participants`,
-        createHiddenWitness
-      )
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-      });
+        const createHiddenWitness = {
+          type: participants[4].participant.type,
+          name: participants[4].participant.name,
+          session: {
+            id: res.data["id"],
+          },
+        };
 
-    axios
-      .post(
-        `http://34.65.77.89:8100/voice/proto/v1/participants`,
-        createWitness
-      )
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
+        const createWitness = {
+          type: witnesses[0].type,
+          name: witnesses[0].fullName,
+          session: {
+            id: res.data["id"],
+          },
+        };
+
+        axios
+          .post(
+            `http://34.65.77.89:8100/voice/proto/v1/participants`,
+            createJudge
+          )
+          .then((res) => {
+            console.log(res);
+          });
+
+        axios
+          .post(
+            `http://34.65.77.89:8100/voice/proto/v1/participants`,
+            createHiddenWitness
+          )
+          .then((res) => {
+            console.log(res);
+          });
+
+        axios
+          .post(
+            `http://34.65.77.89:8100/voice/proto/v1/participants`,
+            createWitness
+          )
+          .then((res) => {
+            console.log(res);
+          });
       });
 
     setOpen(false);
@@ -229,6 +225,7 @@ export default function StartSession(props) {
   };
 
   const handleClose = () => {
+    console.log("close");
     setOpen(false);
     setTime(0);
     setPause(false);

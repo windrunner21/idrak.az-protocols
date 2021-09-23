@@ -57,6 +57,7 @@ export default function EditPage() {
 
       {sessionId !== "none" ? (
         <SaveDocument
+          sessionID={sessionId}
           sessionRecords={sessionRecords}
           recordsToExport={recordsToExport}
           getRecordsToExport={setRecordsToExport}
