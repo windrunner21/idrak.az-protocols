@@ -4,9 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 
 export default function RealtimeMics() {
-  const [realDataJudge, setRealDataJudge] = useState([]);
-  const [realDataWitness, setRealDataWitness] = useState([]);
-  const [realDataHiddenWitness, setRealDataHiddenWitness] = useState([]);
+  const [datae, setData] = useState([]);
 
   const evtSrc = useRef(null);
   const listenEvt = useCallback(() => {
@@ -25,32 +23,19 @@ export default function RealtimeMics() {
       // process the data here,
       // then pass it to state to be rendered
       console.log(data);
-      if (data["mic"] === "Judge") {
-        realDataJudge.push(data["text"]);
-        setRealDataJudge(realDataJudge);
-      }
 
-      if (data["mic"] === "Witness") {
-        realDataWitness.push(data["text"]);
-        setRealDataWitness(realDataWitness);
-      }
-
-      if (data["mic"] === "Hidden Witness") {
-        realDataHiddenWitness.push(data["text"]);
-        setRealDataHiddenWitness(realDataHiddenWitness);
-      }
+      datae.push({ mic: data["mic"], text: data["text"] });
+      setData(datae);
     }
     evtSrc.current.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
     evtSrc.current.onerror = (e) => {
       // error log here
       console.log(e.type);
-      evtSrc.current.close();
     };
-
-    return () => {
-      evtSrc.current.close();
-    };
-  }, [listenEvt, realDataHiddenWitness, realDataJudge, realDataWitness]);
+    // return () => {
+    //   evtSrc.current.close();
+    // };
+  }, [datae, listenEvt]);
 
   return (
     <Grid
@@ -59,39 +44,26 @@ export default function RealtimeMics() {
       spacing={2}
       style={{ marginTop: 15, flexGrow: 1 }}
     >
-      <Grid item>
-        <Typography variant="subtitle2">Judge Mic</Typography>
-        <TextField
-          id="outlined-basic"
-          multiline
-          fullWidth
-          disabled
-          variant="outlined"
-          value={realDataJudge}
-        />
-      </Grid>
-      <Grid item>
-        <Typography variant="subtitle2">Witness Mic</Typography>
-        <TextField
-          id="outlined-basic"
-          multiline
-          fullWidth
-          disabled
-          variant="outlined"
-          value={realDataWitness}
-        />
-      </Grid>
-      <Grid item>
-        <Typography variant="subtitle2">Hidden Witness Mic</Typography>
-        <TextField
-          id="outlined-basic"
-          multiline
-          fullWidth
-          disabled
-          variant="outlined"
-          value={realDataHiddenWitness}
-        />
-      </Grid>
+      {datae.map((item, index) => (
+        <Grid item key={index}>
+          <Grid container alignItems="flex-end" spacing={2}>
+            <Grid item xs={3}>
+              <Typography variant="overline">{item.mic} Mic:</Typography>
+            </Grid>
+            <Grid item style={{ flexGrow: 1 }}>
+              <TextField
+                id="outlined-basic"
+                multiline
+                fullWidth
+                disabled
+                margin="dense"
+                variant="outlined"
+                value={item.text}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+      ))}
     </Grid>
   );
 }

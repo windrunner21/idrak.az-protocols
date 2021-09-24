@@ -60,95 +60,107 @@ export default function StartSession(props) {
 
   // post request to add session
   const handleSubmit = () => {
+    // push participants if exist
+
     // pushing participants - judge
-    participants.push({
-      participant: {
-        id: 1,
-        version: 0,
-        name: props.judgeName,
-        type: "JUDGE",
-        session: {
+    if (props.judgeName !== "") {
+      participants.push({
+        participant: {
           id: 1,
           version: 0,
-          name: sessionName,
-          startDate: timeStamp,
-          endDate: moment().toISOString(true),
-          room: roomName,
+          name: props.judgeName,
+          type: "JUDGE",
+          session: {
+            id: 1,
+            version: 0,
+            name: sessionName,
+            startDate: timeStamp,
+            endDate: moment().toISOString(true),
+            room: roomName,
+          },
         },
-      },
-    });
+      });
+    }
 
     // pushing participants - prosecutor
-    participants.push({
-      participant: {
-        id: 2,
-        version: 0,
-        name: props.prosecutorName,
-        type: "PROSECUTOR",
-        session: {
-          id: 1,
+    if (props.prosecutorName !== "") {
+      participants.push({
+        participant: {
+          id: 2,
           version: 0,
-          name: sessionName,
-          startDate: timeStamp,
-          endDate: moment().toISOString(true),
-          room: roomName,
+          name: props.prosecutorName,
+          type: "PROSECUTOR",
+          session: {
+            id: 1,
+            version: 0,
+            name: sessionName,
+            startDate: timeStamp,
+            endDate: moment().toISOString(true),
+            room: roomName,
+          },
         },
-      },
-    });
+      });
+    }
 
     // pushing participants - lawyer
-    participants.push({
-      participant: {
-        id: 3,
-        version: 0,
-        name: props.lawyerName,
-        type: "ADVOCATE",
-        session: {
-          id: 1,
+    if (props.lawyerName !== "") {
+      participants.push({
+        participant: {
+          id: 3,
           version: 0,
-          name: sessionName,
-          startDate: timeStamp,
-          endDate: moment().toISOString(true),
-          room: roomName,
+          name: props.lawyerName,
+          type: "ADVOCATE",
+          session: {
+            id: 1,
+            version: 0,
+            name: sessionName,
+            startDate: timeStamp,
+            endDate: moment().toISOString(true),
+            room: roomName,
+          },
         },
-      },
-    });
+      });
+    }
 
     // pushing participants - defendant
-    participants.push({
-      participant: {
-        id: 4,
-        version: 0,
-        name: props.defendantName,
-        type: "DEFENDANT",
-        session: {
-          id: 1,
+    if (props.defendantName !== "") {
+      participants.push({
+        participant: {
+          id: 4,
           version: 0,
-          name: sessionName,
-          startDate: timeStamp,
-          endDate: moment().toISOString(true),
-          room: roomName,
+          name: props.defendantName,
+          type: "DEFENDANT",
+          session: {
+            id: 1,
+            version: 0,
+            name: sessionName,
+            startDate: timeStamp,
+            endDate: moment().toISOString(true),
+            room: roomName,
+          },
         },
-      },
-    });
+      });
+    }
 
     // pushing participants - hidden witness
-    participants.push({
-      participant: {
-        id: 6,
-        version: 0,
-        name: props.hiddenWitness,
-        type: "HIDDEN_WITNESS",
-        session: {
-          id: 1,
+    if (props.hiddenWitness !== "") {
+      participants.push({
+        participant: {
+          id: 6,
           version: 0,
-          name: sessionName,
-          startDate: timeStamp,
-          endDate: moment().toISOString(true),
-          room: roomName,
+          name: props.hiddenWitness,
+          type: "HIDDEN_WITNESS",
+          session: {
+            id: 1,
+            version: 0,
+            name: sessionName,
+            startDate: timeStamp,
+            endDate: moment().toISOString(true),
+            room: roomName,
+          },
         },
-      },
-    });
+      });
+    }
 
     setParticipants(participants);
 
@@ -163,56 +175,35 @@ export default function StartSession(props) {
       .then((res) => {
         console.log(res);
 
-        const createJudge = {
-          type: participants[0].participant.type,
-          name: participants[0].participant.name,
-          session: {
-            id: res.data["id"],
-          },
-        };
+        // fixed participants
+        participants.forEach((person) => {
+          axios
+            .post(`http://34.65.77.89:8100/voice/proto/v1/participants`, {
+              type: person.participant.type,
+              name: person.participant.name,
+              session: {
+                id: res.data["id"],
+              },
+            })
+            .then((res) => {
+              console.log(res);
+            });
+        });
 
-        const createHiddenWitness = {
-          type: participants[4].participant.type,
-          name: participants[4].participant.name,
-          session: {
-            id: res.data["id"],
-          },
-        };
-
-        const createWitness = {
-          type: witnesses[0].type,
-          name: witnesses[0].fullName,
-          session: {
-            id: res.data["id"],
-          },
-        };
-
-        axios
-          .post(
-            `http://34.65.77.89:8100/voice/proto/v1/participants`,
-            createJudge
-          )
-          .then((res) => {
-            console.log(res);
-          });
-
-        axios
-          .post(
-            `http://34.65.77.89:8100/voice/proto/v1/participants`,
-            createHiddenWitness
-          )
-          .then((res) => {
-            console.log(res);
-          });
-
-        axios
-          .post(
-            `http://34.65.77.89:8100/voice/proto/v1/participants`,
-            createWitness
-          )
-          .then((res) => {
-            console.log(res);
-          });
+        // vary witnesses
+        witnesses.forEach((person) => {
+          axios
+            .post(`http://34.65.77.89:8100/voice/proto/v1/participants`, {
+              type: person.type,
+              name: person.fullName,
+              session: {
+                id: res.data["id"],
+              },
+            })
+            .then((res) => {
+              console.log(res);
+            });
+        });
       });
 
     setOpen(false);
@@ -222,7 +213,6 @@ export default function StartSession(props) {
   };
 
   const handleClose = () => {
-    console.log("close");
     setOpen(false);
     setTime(0);
     setPause(false);
