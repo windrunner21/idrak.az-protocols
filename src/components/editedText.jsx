@@ -34,6 +34,10 @@ export default function EditedText(props) {
     setIndex(index);
   };
 
+  const handleClickClose = () => {
+    setOpen(false);
+  };
+
   const handleClose = (value, index, id) => {
     setOpen(false);
 
@@ -174,6 +178,7 @@ export default function EditedText(props) {
                           selectedValue={selectedValue}
                           open={open}
                           onClose={handleClose}
+                          onClickClose={handleClickClose}
                           index={globalIndex}
                         />
                       </Grid>
@@ -211,7 +216,7 @@ export default function EditedText(props) {
 
 function SimpleDialog(props) {
   const handleClose = () => {
-    props.onClose(props.selectedValue);
+    props.onClickClose();
   };
 
   const handleListItemClick = (value, id) => {
