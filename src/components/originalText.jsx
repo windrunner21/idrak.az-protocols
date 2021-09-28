@@ -36,7 +36,7 @@ export default function OriginalText(props) {
                   fullWidth
                   disabled
                   variant="outlined"
-                  value={item["transriptionEdited"]}
+                  value={JSON.parse(item["transriptionOriginal"]).fulltext}
                 />
               </Grid>
             ))}
