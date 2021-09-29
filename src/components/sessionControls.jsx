@@ -11,6 +11,7 @@ import Button from "@material-ui/core/Button";
 import Backdrop from "@material-ui/core/Backdrop";
 import SaveIcon from "@material-ui/icons/InsertDriveFile";
 import TextField from "@material-ui/core/TextField";
+import { trackPromise } from "react-promise-tracker";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import axios from "axios";
 import PDFDocument from "./pdfDocument";
@@ -43,21 +44,23 @@ export default function SessionControls(props) {
     setSessionID(myValue);
 
     props.getRecordsBySession([]);
-    axios
-      .get(
-        `http://34.65.77.89:8100/voice/proto/v1/records?sessionId=` + myValue
-      )
-      .then((res) => {
-        props.getRecordsBySession(res.data);
+    trackPromise(
+      axios
+        .get(
+          `http://34.65.77.89:8100/voice/proto/v1/records?sessionId=` + myValue
+        )
+        .then((res) => {
+          props.getRecordsBySession(res.data);
 
-        res.data.forEach((element) => {
-          props.recordsToExport.push({
-            editedText: element["transriptionEdited"],
-            id: element["id"],
+          res.data.forEach((element) => {
+            props.recordsToExport.push({
+              editedText: element["transriptionEdited"],
+              id: element["id"],
+            });
+            props.getRecordsToExport(props.recordsToExport);
           });
-          props.getRecordsToExport(props.recordsToExport);
-        });
-      });
+        })
+    );
 
     axios
       .get(
