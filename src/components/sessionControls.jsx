@@ -42,6 +42,7 @@ export default function SessionControls(props) {
     props.getSession(myValue);
     setSessionID(myValue);
 
+    props.getRecordsBySession([]);
     axios
       .get(
         `http://34.65.77.89:8100/voice/proto/v1/records?sessionId=` + myValue
@@ -79,13 +80,13 @@ export default function SessionControls(props) {
           sessionID
       )
       .then((res) => {
-        console.log(res.data);
         setDocument(res.data);
       });
   };
 
   useEffect(() => {
     // get all sessions
+
     axios.get(`http://34.65.77.89:8100/voice/proto/v1/sessions`).then((res) => {
       setSessions(res.data);
     });
@@ -120,9 +121,6 @@ export default function SessionControls(props) {
                     onChange={handleChange}
                     label="Sessions"
                   >
-                    <MenuItem value="none">
-                      <em>None</em>
-                    </MenuItem>
                     {sessions.map((item) => (
                       <MenuItem
                         data-my-value={item["id"]}

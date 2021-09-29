@@ -121,7 +121,7 @@ export default function EditedText(props) {
           }
         });
       });
-  }, [props.sessionID, participants]);
+  }, [participants, props.sessionID]);
 
   return (
     <div
