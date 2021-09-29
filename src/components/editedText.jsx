@@ -114,14 +114,16 @@ export default function EditedText(props) {
           props.sessionID
       )
       .then((res) => {
+        var temp = [];
         res.data.forEach((element) => {
           if (element["type"] === "WITNESS") {
-            participants.push(element);
-            setParticipants(participants);
+            temp.push(element);
           }
         });
+
+        setParticipants(temp);
       });
-  }, [participants, props.sessionID]);
+  }, [props.sessionID]);
 
   return (
     <div
