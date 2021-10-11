@@ -10,7 +10,7 @@ export default function RealtimeMics() {
   const listenEvt = useCallback(() => {
     if (!evtSrc.current) {
       evtSrc.current = new EventSource(
-        "http://34.65.77.89:8100/voice/proto/v1/notification"
+        "http://localhost:8100/voice/proto/v1/notification"
       );
     }
   }, []);

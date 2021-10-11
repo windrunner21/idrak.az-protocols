@@ -10,7 +10,7 @@ export default function SaveDocument(props) {
   const handleCancel = () => {
     axios
       .get(
-        `http://34.65.77.89:8100/voice/proto/v1/records?sessionId=` +
+        `http://localhost:8100/voice/proto/v1/records?sessionId=` +
           props.sessionID
       )
       .then((res) => {
@@ -31,7 +31,7 @@ export default function SaveDocument(props) {
 
       axios
         .put(
-          `http://34.65.77.89:8100/voice/proto/v1/records/` +
+          `http://localhost:8100/voice/proto/v1/records/` +
             props.recordsToExport[index]["id"],
           updateText
         )

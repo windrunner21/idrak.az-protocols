@@ -171,14 +171,14 @@ export default function StartSession(props) {
     };
 
     axios
-      .post(`http://34.65.77.89:8100/voice/proto/v1/sessions`, createSession)
+      .post(`http://localhost:8100/voice/proto/v1/sessions`, createSession)
       .then((res) => {
         console.log(res);
 
         // fixed participants
         participants.forEach((person) => {
           axios
-            .post(`http://34.65.77.89:8100/voice/proto/v1/participants`, {
+            .post(`http://localhost:8100/voice/proto/v1/participants`, {
               type: person.participant.type,
               name: person.participant.name,
               session: {
@@ -193,7 +193,7 @@ export default function StartSession(props) {
         // vary witnesses
         witnesses.forEach((person) => {
           axios
-            .post(`http://34.65.77.89:8100/voice/proto/v1/participants`, {
+            .post(`http://localhost:8100/voice/proto/v1/participants`, {
               type: person.type,
               name: person.fullName,
               session: {
