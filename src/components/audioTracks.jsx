@@ -35,7 +35,7 @@ export default function AudioTracks(props) {
                   </Grid>
                   <Grid item>
                     <ReactAudioPlayer
-                      src={"data:audio/wav;base64," + item["audioRecord"]}
+                      src={"data:audio/ogg;base64," + item["audioRecord"]}
                       controls
                     />
                   </Grid>

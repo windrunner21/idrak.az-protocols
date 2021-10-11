@@ -30,7 +30,7 @@ export default function RealtimeMics() {
     evtSrc.current.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
     evtSrc.current.onerror = (e) => {
       // error log here
-      console.log(e.type);
+      console.log(e);
     };
     // return () => {
     //   evtSrc.current.close();
@@ -47,7 +47,7 @@ export default function RealtimeMics() {
       {datae.map((item, index) => (
         <Grid item key={index}>
           <Grid container alignItems="flex-end" spacing={2}>
-            <Grid item xs={3}>
+            <Grid item xs={1}>
               <Typography variant="overline">{item.mic} Mic:</Typography>
             </Grid>
             <Grid item style={{ flexGrow: 1 }}>
