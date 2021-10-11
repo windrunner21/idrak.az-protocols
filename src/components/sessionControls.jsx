@@ -47,7 +47,7 @@ export default function SessionControls(props) {
     trackPromise(
       axios
         .get(
-          `http://localhost:8100/voice/proto/v1/records?sessionId=` + myValue
+          `http://31.171.80.65:8100/voice/proto/v1/records?sessionId=` + myValue
         )
         .then((res) => {
           props.getRecordsBySession(res.data);
@@ -64,7 +64,8 @@ export default function SessionControls(props) {
 
     axios
       .get(
-        `http://localhost:8100/voice/proto/v1/participants?sessionId=` + myValue
+        `http://31.171.80.65:8100/voice/proto/v1/participants?sessionId=` +
+          myValue
       )
       .then((res) => {
         setMics(res.data);
@@ -78,7 +79,8 @@ export default function SessionControls(props) {
     setOpen(!open);
     axios
       .get(
-        `http://localhost:8100/voice/proto/v1/fullrecord?sessionId=` + sessionID
+        `http://31.171.80.65:8100/voice/proto/v1/fullrecord?sessionId=` +
+          sessionID
       )
       .then((res) => {
         setDocument(res.data);
@@ -88,9 +90,11 @@ export default function SessionControls(props) {
   useEffect(() => {
     // get all sessions
 
-    axios.get(`http://localhost:8100/voice/proto/v1/sessions`).then((res) => {
-      setSessions(res.data);
-    });
+    axios
+      .get(`http://31.171.80.65:8100/voice/proto/v1/sessions`)
+      .then((res) => {
+        setSessions(res.data);
+      });
   }, []);
 
   return (

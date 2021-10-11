@@ -54,7 +54,7 @@ export default function EditedText(props) {
 
       axios
         .put(
-          `http://localhost:8100/voice/proto/v1/records/` +
+          `http://31.171.80.65:8100/voice/proto/v1/records/` +
             props.recordsToExport[index]["id"],
           updateText
         )
@@ -93,7 +93,7 @@ export default function EditedText(props) {
           console.log(updateText);
           axios
             .put(
-              `http://localhost:8100/voice/proto/v1/records/` +
+              `http://31.171.80.65:8100/voice/proto/v1/records/` +
                 props.recordsToExport[index]["id"],
               updateText
             )
@@ -110,7 +110,7 @@ export default function EditedText(props) {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8100/voice/proto/v1/participants?sessionId=` +
+        `http://31.171.80.65:8100/voice/proto/v1/participants?sessionId=` +
           props.sessionID
       )
       .then((res) => {
